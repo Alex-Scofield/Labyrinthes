@@ -46,7 +46,7 @@ class PseudoLabyrinthe():
         for i in range(self.__taille[0]):
             for j in range(self.__taille[1]):
                 for noeud in self.__noeuds:
-                    if noeud.get_id() == (i, j):
+                    if noeud.get_id() == (id[0], id[1]):
                         return noeud
     
 
@@ -134,8 +134,25 @@ class Noeud():
     # Ajouter des vérifications.
     def ajoute_connexions(self, *args):
         '''
-        Ajoute des connexions à self.__connexions. Il n'y a pas de vérifications.
-        @param noeud: Un autre Noeud.
+        Ajoute des connexions à self.__connexions. Vérifie que les connexions sont valides.
+        @param *args: Liste d'autres Noeud.
         '''
+
         for arg in args:
+            if abs(self.__id[0]-arg.get_id()[0])>1 or abs(self.__id[1]-arg.get_id()[1])>1:
+                raise ValueError(f"On ne peut pas connecter noeuds {self.__id} et {arg.get_id()}.")
+            if self.__id==arg.get_id():
+                raise ValueError(f"On ne peut pas connecter noeud {self.get_id()} avec lui même.")
+
             self.__connexions.append(arg)
+    
+    def supprime_connexions(self, *args) -> None:
+        '''
+        Supprime des connexions de self.__connexions.
+        @param *args: Liste d'autres Noeud.
+        '''
+
+        for arg in args:
+            if arg not in self.__connexions:
+                raise ValueError(f"Noeud {arg.get_id()} n'est pas connecté à {self.__id}.")
+            self.__connexions.remove(arg)
