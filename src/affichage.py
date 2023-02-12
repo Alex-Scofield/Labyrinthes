@@ -1,9 +1,9 @@
-from utilites import *
-
-
 '''
 Module contenant les différents méthodes d'affichage de labyrinthes.
 '''
+
+from utilites import *
+
 
 directions = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 cote = ["haut", "droite", "gauche", "bas"]

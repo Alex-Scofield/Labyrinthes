@@ -4,8 +4,6 @@ Algorithmes.
 
 from utilites import *
 
-def construit_pseudo_2D():
-    pass
 
 def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
     '''
@@ -33,7 +31,7 @@ def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
     return True
 
 
-def verifie_labytinthe(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
+def verifie_labyrinthe(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
     '''
     Vérifie si un PseudoLabyrinthe est un Labyrinthe.
     @param pseudo_labyrinthe: PseudoLabyrinthe à vérifier.
@@ -54,3 +52,26 @@ def verifie_labytinthe(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
                 visites.append(connexion)
                 
     return True
+
+# Pour l'instant renvoie PseudoLabyrinthe
+def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
+    '''
+    Construit un labyrinthe random de la taille donée.
+    @param taille: tuple contenant la taille du labyrinthe à construir.
+    @return Labyrinthe random de cette taille.
+    '''
+
+    import random
+
+    pseudo_labyrinthe = PseudoLabyrinthe(taille)
+
+    while not(verifie_labyrinthe(pseudo_labyrinthe)):
+        noeud: Noeud = random.choice(pseudo_labyrinthe.get_noeuds())
+        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pseudo_labyrinthe)) 
+        if voisin_choisi not in noeud.get_connexions():
+            noeud.ajoute_connexions(voisin_choisi)
+            if not(verifie_connexite(pseudo_labyrinthe)):
+                noeud.supprime_connexions(voisin_choisi)
+        
+    return pseudo_labyrinthe 
+

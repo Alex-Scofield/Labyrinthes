@@ -104,6 +104,12 @@ class PseudoLabyrinthe():
         
         return self.__noeuds
 
+class Labyrinthe(PseudoLabyrinthe):
+    '''
+    Labyrinthe vérifiant les deux proprietés expliquées au sujet.
+    '''
+
+    pass
 
 class Noeud():
     '''
@@ -156,3 +162,32 @@ class Noeud():
             if arg not in self.__connexions:
                 raise ValueError(f"Noeud {arg.get_id()} n'est pas connecté à {self.__id}.")
             self.__connexions.remove(arg)
+
+
+    def get_voisins(self, pseudo_labyrinthe:PseudoLabyrinthe) -> list:
+        '''
+        Trouve les voisins du noeud dans le PseudoLabyrinthe donné comme paramètre.
+        @param pseudo_labyrinthe: PseudoLabyrinthe où se trouve le Noeud.
+        @return list contenant les noeuds voisins du noeud en question dans pseudo_labyrinthe.
+        '''
+
+        voisins = []
+        try: 
+            voisins.append(pseudo_labyrinthe.get_noeud_par_id((self.get_id()[0]-1, self.get_id()[1])))
+        except ValueError:
+            pass
+
+        try:
+            voisins.append(pseudo_labyrinthe.get_noeud_par_id((self.get_id()[0], self.get_id()[1]-1)))
+        except ValueError:
+            pass
+        
+        try:
+            voisins.append(pseudo_labyrinthe.get_noeud_par_id((self.get_id()[0]+1, self.get_id()[1])))
+        except ValueError:
+            pass
+
+        try:
+            voisins.append(pseudo_labyrinthe.get_noeud_par_id((self.get_id()[0], self.get_id()[1]+1)))
+        except ValueError:
+            pass
