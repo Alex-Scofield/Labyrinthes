@@ -4,8 +4,6 @@ Algorithmes.
 
 from utilites import *
 
-print("POTATOE")
-
 def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe, recursive: bool = True) -> bool:
     '''
     Application de l'algorithme bfs pour vérifier si un PseudoLabyrinthe est connexe.
