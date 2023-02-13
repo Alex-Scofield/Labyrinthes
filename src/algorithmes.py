@@ -2,7 +2,7 @@
 Algorithmes.
 '''
 
-from utilites import *
+from .utilites import *
 
 
 def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
