@@ -191,3 +191,5 @@ class Noeud():
             voisins.append(pseudo_labyrinthe.get_noeud_par_id((self.get_id()[0], self.get_id()[1]+1)))
         except ValueError:
             pass
+
+        return voisins

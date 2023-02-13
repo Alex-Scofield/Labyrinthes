@@ -5,11 +5,11 @@ Algorithmes.
 from .utilites import *
 
 
-def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
+def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe, recursive: bool = True) -> bool:
     '''
     Application de l'algorithme bfs pour vérifier si un PseudoLabyrinthe est connexe.
     @param pseudo_labyrinthe: labyrinthe à vérifier.
-    @return bool; true si le labyrinthe est connexe, false si non.
+    @return bool: true si le labyrinthe est connexe, false si non.
     '''
 
     visites = []
@@ -18,15 +18,14 @@ def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
     visites.append(debut)
     queue.append(debut)
     while queue != []:
-        noeud_actuel = queue.pop(0)
+        noeud_actuel: Noeud = queue.pop(0)
         for connexion in noeud_actuel.get_connexions():
             if connexion not in visites:
                 visites.append(connexion)
                 queue.append(connexion)
-
-    for noeud in pseudo_labyrinthe.get_noeuds():
-        if noeud not in visites:
-            return False
+    
+    if len(visites)!=len(pseudo_labyrinthe.get_noeuds()):
+        return False
     
     return True
 
