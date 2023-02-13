@@ -35,15 +35,15 @@ def dessineNoeud(n: Noeud) -> None:
             lines.append([(n.get_id()[0], n.get_id()[1]+1),
                          (n.get_id()[0]+1, n.get_id()[1]+1)])
         elif m == (0, -1):
-            lines.append([n.get_id(), (n.get_id()[0]+1, n.get_id()[1]+1)])
-
-    for line in lines:
-        line2d(line)
+            lines.append([n.get_id(), (n.get_id()[0]+1, n.get_id()[1])])
+    return lines
+    
         
         
 def afficheLaby(L : PseudoLabyrinthe):
-        for n in L.get_noeuds():
-            dessineNoeud(n)
+    lines=[]
+    for n in L.get_noeuds():
+            lines.append(dessineNoeud(n))
 
 
 

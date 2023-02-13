@@ -83,7 +83,8 @@ def construit_pseudo_labyrinthe_vide(taille: tuple):
     pseudo_labyrinthe = PseudoLabyrinthe(taille)
 
     for noeud in pseudo_labyrinthe.get_noeuds():
-        noeud:Noeud
-        noeud.ajoute_connexions(noeud.get_voisins(pseudo_labyrinthe))
+        voisins = noeud.get_voisins(pseudo_labyrinthe)
+        for voisin in voisins:
+            noeud.ajoute_connexions(voisin)
     
     return pseudo_labyrinthe
