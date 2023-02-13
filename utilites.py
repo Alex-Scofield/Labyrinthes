@@ -38,6 +38,7 @@ class PseudoLabyrinthe():
         Renvoie le Noeud se trouvant à la position id.
         @param id: tuple.
         '''
+
         if id[0] < 0 or id[1] < 0 or id[0] >= self.__taille[0] or id[1] >= self.__taille[1]:
             raise ValueError(f"{id} n'est pas une position valide.")
 
@@ -53,6 +54,7 @@ class PseudoLabyrinthe():
         le PseudoLabyrinthe. Ce ne devrait pas être nécessaire après avoir utiliser le
         construct.
         '''
+
         for noeud in self.__noeuds:
             noeud_id = noeud.get_id()
             for i in range(len(noeud_id)):
@@ -90,6 +92,7 @@ class PseudoLabyrinthe():
         '''
         Vérifie que l'objet et un PseudoLabyrinthe valide, lance erreurs si non.
         '''
+
         self.verifie_noeuds()
         self.verifie_connexions()
 
@@ -150,16 +153,24 @@ class Noeud():
         @param *args: Liste d'autres Noeud.
         '''
 
+        TUPLES_VALIDES = [(1,0), (-1,0), (0, 1), (0, -1)]
+
         for arg in args:
             if(type(arg)!= Noeud):
                 raise TypeError(f"{arg} est de type {type(arg)} est ce n'est pas un noeud.")
 
+<<<<<<< HEAD
             if abs(self.__id[0]-arg.get_id()[0]) > 1 or abs(self.__id[1]-arg.get_id()[1]) > 1:
                 raise ValueError(
                     f"On ne peut pas connecter noeuds {self.__id} et {arg.get_id()}.")
             if self.__id == arg.get_id():
                 raise ValueError(
                     f"On ne peut pas connecter noeud {self.get_id()} avec lui même.")
+=======
+            substraction = tuple(map(lambda i, j: i - j, arg.get_id(), self.get_id()))
+            if substraction not in TUPLES_VALIDES:
+                raise ValueError(f"On ne peut pas connecter tuple {arg.get_id()} avec {self.get_id()}.")
+>>>>>>> 3106b786324ec109c0c8aa53bbe2e6ef5c76d70a
 
             self.__connexions.append(arg)
 
