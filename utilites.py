@@ -143,6 +143,9 @@ class Noeud():
         '''
 
         for arg in args:
+            if(type(arg)!= Noeud):
+                raise TypeError(f"{arg} est de type {type(arg)} est ce n'est pas un noeud.")
+
             if abs(self.__id[0]-arg.get_id()[0]) > 1 or abs(self.__id[1]-arg.get_id()[1]) > 1:
                 raise ValueError(
                     f"On ne peut pas connecter noeuds {self.__id} et {arg.get_id()}.")
