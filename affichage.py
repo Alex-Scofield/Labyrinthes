@@ -39,6 +39,12 @@ def dessineNoeud(n: Noeud) -> None:
 
     for line in lines:
         line2d(line)
+        
+        
+def afficheLaby(L : PseudoLabyrinthe):
+        for n in L.get_noeuds():
+            dessineNoeud(n)
+
 
 
 n = Noeud((3, 4), [(4, 4), (3, 3), (3, 5)])
