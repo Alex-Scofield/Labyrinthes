@@ -2,8 +2,9 @@
 Algorithmes.
 '''
 
-from .utilites import *
+from utilites import *
 
+print("POTATOE")
 
 def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe, recursive: bool = True) -> bool:
     '''
@@ -74,3 +75,17 @@ def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
         
     return pseudo_labyrinthe 
 
+def construit_pseudo_labyrinthe_vide(taille: tuple):
+    '''
+    Construit un PseudoLabyrinthe où tous les connexions sont faites.
+    @param taille: tuple contenant la taille du PseudoLabyrinthe à construire.
+    @return PseudoLabyrinthe sans murs.
+    '''
+
+    pseudo_labyrinthe = PseudoLabyrinthe(taille)
+
+    for noeud in pseudo_labyrinthe.get_noeuds():
+        noeud:Noeud
+        noeud.ajoute_connexions(noeud.get_voisins(pseudo_labyrinthe))
+    
+    return pseudo_labyrinthe

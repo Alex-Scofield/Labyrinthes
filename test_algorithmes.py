@@ -3,13 +3,13 @@ Tests pour les algorithmes implantés.
 '''
 
 import unittest
-from src.utilites import *
-from src.algorithmes import *
+from algorithmes import *
+from utilites import *
 
 class TestVerifications(unittest.TestCase):
     def test_verifie_connexite(self):
         taille = (3,3)
-        pseudo_labyrinthe_sans_murs = PseudoLabyrinthe(taille)
+        pseudo_labyrinthe_sans_murs = construit_pseudo_labyrinthe_vide(taille)
         self.assertFalse(verifie_connexite(pseudo_labyrinthe_sans_murs))
 
 class TestConstructions(unittest.TestCase):
