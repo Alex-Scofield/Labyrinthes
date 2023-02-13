@@ -28,6 +28,6 @@ class TestConstructions(unittest.TestCase):
 
 
 suite = unittest.TestSuite()
-suite.addTest(TestConstructions("test_construit_pseudo_labyrinthe_vide"))
+suite.addTest(TestVerifications("test_verifie_connexite"))
 runner = unittest.TextTestRunner()
 runner.run(suite)

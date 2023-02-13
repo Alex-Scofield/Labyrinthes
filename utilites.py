@@ -99,6 +99,14 @@ class PseudoLabyrinthe():
         '''
 
         return self.__noeuds
+    
+    def get_taille(self):
+        '''
+        Renvoie la taille du PseudoLabyrinthe.
+        '''
+
+        return self.__taille
+
 
 
 class Labyrinthe(PseudoLabyrinthe):
