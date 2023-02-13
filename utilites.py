@@ -102,14 +102,13 @@ class PseudoLabyrinthe():
         '''
 
         return self.__noeuds
-    
+
     def get_taille(self):
         '''
         Renvoie la taille du PseudoLabyrinthe.
         '''
 
         return self.__taille
-
 
 
 class Labyrinthe(PseudoLabyrinthe):
@@ -153,24 +152,18 @@ class Noeud():
         @param *args: Liste d'autres Noeud.
         '''
 
-        TUPLES_VALIDES = [(1,0), (-1,0), (0, 1), (0, -1)]
+        TUPLES_VALIDES = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
         for arg in args:
-            if(type(arg)!= Noeud):
-                raise TypeError(f"{arg} est de type {type(arg)} est ce n'est pas un noeud.")
+            if(type(arg) != Noeud):
+                raise TypeError(
+                    f"{arg} est de type {type(arg)} est ce n'est pas un noeud.")
 
-<<<<<<< HEAD
-            if abs(self.__id[0]-arg.get_id()[0]) > 1 or abs(self.__id[1]-arg.get_id()[1]) > 1:
-                raise ValueError(
-                    f"On ne peut pas connecter noeuds {self.__id} et {arg.get_id()}.")
-            if self.__id == arg.get_id():
-                raise ValueError(
-                    f"On ne peut pas connecter noeud {self.get_id()} avec lui même.")
-=======
-            substraction = tuple(map(lambda i, j: i - j, arg.get_id(), self.get_id()))
+            substraction = tuple(
+                map(lambda i, j: i - j, arg.get_id(), self.get_id()))
             if substraction not in TUPLES_VALIDES:
-                raise ValueError(f"On ne peut pas connecter tuple {arg.get_id()} avec {self.get_id()}.")
->>>>>>> 3106b786324ec109c0c8aa53bbe2e6ef5c76d70a
+                raise ValueError(
+                    f"On ne peut pas connecter tuple {arg.get_id()} avec {self.get_id()}.")
 
             self.__connexions.append(arg)
 
