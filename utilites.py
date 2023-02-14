@@ -22,7 +22,7 @@ class PseudoLabyrinthe():
 
         for i in range(self.__taille[0]):
             for j in range(self.__taille[1]):
-                self.__noeuds.append(Noeud((i, j)))
+                self.__noeuds.append(Noeud((i, j), connexions=[]))
 
     def construit(self, noeuds: list) -> None:
         '''
