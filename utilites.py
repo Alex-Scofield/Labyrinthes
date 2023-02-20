@@ -168,6 +168,7 @@ class Noeud():
     def ajoute_connexions(self, *args):
         '''
         Ajoute des connexions à self.__connexions. Vérifie que les connexions sont valides.
+        Dans la plupart des cas utiliser ajoute_murs et ne pas ajoute_connexions.
         @param *args: Liste d'autres Noeud.
         '''
 
