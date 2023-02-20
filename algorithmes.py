@@ -126,4 +126,9 @@ def murs_to_PseudoLabyrinthe(collection_murs: tuple, taille:tuple):
         pseudo_labyrinthe.ajoute_murs((noeud1, noeud2))
     return pseudo_labyrinthe
 
-print(len(construit_matrice_labyrinthes((6,2))))
+def filtre_liste_PseudoLabyrinthe(pseudo_labyrinthes: list):
+    liste_labyrinthes = []
+    for pl in pseudo_labyrinthes:
+        if verifie_labyrinthe(pl):
+            liste_labyrinthes.append(pl)
+    return liste_labyrinthes
