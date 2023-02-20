@@ -4,6 +4,7 @@ Construction de structures de données utiles.
 
 DIRECTIONS = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
+
 class PseudoLabyrinthe():
     '''
     Un PseudoLabyrinthe de taille m*n est une graphe avec m*n noeuds où chaque
@@ -89,15 +90,13 @@ class PseudoLabyrinthe():
                     raise ValueError(
                         f"Connexion directe entre deux noeuds pas contigus.")
 
-    def ajoute_murs(*args) -> None:
+    def ajoute_murs(self, *args) -> None:
         '''
         Procédure qui ajoute un mur entre les noeuds donnés comme paramètres.
         @param *args: tuples de Noeuds.
         '''
 
         for arg in args:
-            if type(arg) != tuple:
-                raise TypeError()
 
             noeud1 = arg[0]
             noeud2 = arg[1]
@@ -105,7 +104,6 @@ class PseudoLabyrinthe():
                 noeud1.supprime_connexions(noeud2)
             if noeud1 in noeud2.get_connexions():
                 noeud2.supprime_connexions(noeud1)
-
 
     def verifie(self):
         '''
