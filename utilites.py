@@ -4,6 +4,7 @@ Construction de structures de données utiles.
 
 DIRECTIONS = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
+
 class PseudoLabyrinthe():
     '''
     Un PseudoLabyrinthe de taille m*n est une graphe avec m*n noeuds où chaque
@@ -96,13 +97,13 @@ class PseudoLabyrinthe():
         '''
 
         for arg in args:
+
             noeud1 = arg[0]
             noeud2 = arg[1]
             if noeud2 in noeud1.get_connexions():
                 noeud1.supprime_connexions(noeud2)
             if noeud1 in noeud2.get_connexions():
                 noeud2.supprime_connexions(noeud1)
-
 
     def verifie(self):
         '''
