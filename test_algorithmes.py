@@ -6,12 +6,13 @@ import unittest
 from algorithmes import *
 from utilites import *
 
+TAILLE_TEST = (8, 3)
+
 class TestVerificationsConnexite(unittest.TestCase):
     def test_verifie_connexite_vide(self):
         taille = (3,3)
         pseudo_labyrinthe_sans_murs = construit_pseudo_labyrinthe_vide(taille)
         self.assertTrue(verifie_connexite(pseudo_labyrinthe_sans_murs))
-TAILLE_TEST = (8, 3)
 
 
 class TestVerificationsConnexite(unittest.TestCase):

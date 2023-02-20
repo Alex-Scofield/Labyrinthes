@@ -2,6 +2,7 @@
 Construction de structures de données utiles.
 '''
 
+DIRECTIONS = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
 class PseudoLabyrinthe():
     '''
@@ -87,6 +88,19 @@ class PseudoLabyrinthe():
                 if abs(noeud_id[0]-connexion_id[0]) > 1 or abs(noeud_id[1]-connexion_id[1]) > 1:
                     raise ValueError(
                         f"Connexion directe entre deux noeuds pas contigus.")
+
+    def ajoute_mur(noeud1:Noeud, noeud2: Noeud) -> None:
+        '''
+        Procédure qui ajoute un mur entre les noeuds donnés comme paramètres.
+        @param noeud1: Noeud
+        @param noeud2: NOeud
+        '''
+
+        if noeud2 in noeud1.get_connexions():
+            noeud1.supprime_connexions(noeud2)
+        if noeud1 in noeud2.get_connexions():
+            noeud2.supprime_connexions(noeud1)
+
 
     def verifie(self):
         '''
