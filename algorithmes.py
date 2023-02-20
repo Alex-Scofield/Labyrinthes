@@ -89,9 +89,41 @@ def construit_pseudo_labyrinthe_vide(taille: tuple):
     
     return pseudo_labyrinthe
 
-def construit_pseudo_labyrinthes(taille: tuple) -> list:
+def construit_matrice_labyrinthes(taille: tuple) -> list:
     '''
-    Construit tous
+    Construit tous les PseudoLabyrinthes d'une taille donnée.
+    @param taille: taille des PseudoLabyrinthe à construir
+    @return list avec tous les PseudoLabyrinthes en forme de matrice de murs valides de la taille donée.
     '''
 
-    pass
+    from itertools import chain, combinations
+
+    murs_total = []
+    for i in range(taille[0]):
+        for j in range(taille[1]):
+            if i+1<taille[0] and ((i+1,j),(i,j)) not in murs_total:
+                    murs_total.append(((i, j),(i+1,j)))
+            if j+1<taille[1] and ((i,j+1),(i,j)) not in murs_total:
+                murs_total.append(((i, j),(i,j+1)))
+            if i-1>0 and ((i-1,j),(i,j)) not in murs_total:
+                murs_total.append(((i, j),(i-1,j)))
+            if j-1>0 and ((i,j-1),(i,j)) not in murs_total:
+                murs_total.append(((i, j),(i,j-1)))
+
+    return list(chain.from_iterable(combinations(murs_total, r) for r in range(len(murs_total)+1)))
+
+def murs_to_PseudoLabyrinthe(collection_murs: tuple, taille:tuple):
+    '''
+    Convert une collection de murs en des PseudoLabyrinthes.
+    @param collection_murs: tuple contenant les murs à ajouter.
+    @param taille: taille du PseudoLabyrinthe.
+    '''
+
+    pseudo_labyrinthe = construit_pseudo_labyrinthe_vide(taille)
+    for mur in collection_murs:
+        noeud1 = pseudo_labyrinthe.get_noeud_par_id(mur[0])
+        noeud2 = pseudo_labyrinthe.get_noeud_par_id(mur[1])
+        pseudo_labyrinthe.ajoute_murs((noeud1, noeud2))
+    return pseudo_labyrinthe
+
+print(len(construit_matrice_labyrinthes((6,2))))
