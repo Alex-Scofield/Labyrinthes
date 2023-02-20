@@ -130,8 +130,8 @@ def get_PseudoLabyrinthes(taille: tuple):
     matrice = construit_matrice_labyrinthes(taille)
     liste = []
     for pl in matrice:
-        liste.append(murs_to_PseudoLabyrinthe(pl))
-    return pl
+        liste.append(murs_to_PseudoLabyrinthe(pl, taille))
+    return liste
 
 def filtre_liste_PseudoLabyrinthe(pseudo_labyrinthes: list):
     liste_labyrinthes = []
