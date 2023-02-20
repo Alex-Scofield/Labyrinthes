@@ -46,7 +46,7 @@ def verifie_labyrinthe(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
                 noeud.supprime_connexions(connexion)
                 if verifie_connexite(pseudo_labyrinthe):
                     return False
-                noeud.ajoute_connexions(connexion)
+                pseudo_labyrinthe.ajoute_murs((noeud,connexion))
                 visites.append(connexion)
                 
     return True
