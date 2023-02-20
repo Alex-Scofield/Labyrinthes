@@ -89,17 +89,22 @@ class PseudoLabyrinthe():
                     raise ValueError(
                         f"Connexion directe entre deux noeuds pas contigus.")
 
-    def ajoute_mur(noeud1:Noeud, noeud2: Noeud) -> None:
+    def ajoute_murs(*args) -> None:
         '''
         Procédure qui ajoute un mur entre les noeuds donnés comme paramètres.
-        @param noeud1: Noeud
-        @param noeud2: NOeud
+        @param *args: tuples de Noeuds.
         '''
 
-        if noeud2 in noeud1.get_connexions():
-            noeud1.supprime_connexions(noeud2)
-        if noeud1 in noeud2.get_connexions():
-            noeud2.supprime_connexions(noeud1)
+        for arg in args:
+            if type(arg) != tuple:
+                raise TypeError()
+
+            noeud1 = arg[0]
+            noeud2 = arg[1]
+            if noeud2 in noeud1.get_connexions():
+                noeud1.supprime_connexions(noeud2)
+            if noeud1 in noeud2.get_connexions():
+                noeud2.supprime_connexions(noeud1)
 
 
     def verifie(self):
