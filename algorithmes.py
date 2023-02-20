@@ -88,3 +88,10 @@ def construit_pseudo_labyrinthe_vide(taille: tuple):
             noeud.ajoute_connexions(voisin)
     
     return pseudo_labyrinthe
+
+def construit_pseudo_labyrinthes(taille: tuple) -> list:
+    '''
+    Construit tous
+    '''
+
+    pass
