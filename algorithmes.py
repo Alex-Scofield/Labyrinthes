@@ -67,7 +67,7 @@ def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
         noeud: Noeud = random.choice(pseudo_labyrinthe.get_noeuds())
         voisin_choisi: Noeud = random.choice(noeud.get_voisins(pseudo_labyrinthe)) 
         if voisin_choisi not in noeud.get_connexions():
-            noeud.ajoute_connexions(voisin_choisi)
+            pseudo_labyrinthe.ajoute_murs((noeud, voisin_choisi))
             if not(verifie_connexite(pseudo_labyrinthe)):
                 noeud.supprime_connexions(voisin_choisi)
         

@@ -13,6 +13,9 @@ class TestVerificationsConnexite(unittest.TestCase):
         taille = (3,3)
         pseudo_labyrinthe_sans_murs = construit_pseudo_labyrinthe_vide(taille)
         self.assertTrue(verifie_connexite(pseudo_labyrinthe_sans_murs))
+    
+    def test_carre_ne_pas_connexe(self):
+        
 
 
 class TestVerificationsConnexite(unittest.TestCase):
@@ -24,19 +27,6 @@ class TestVerificationsConnexite(unittest.TestCase):
         taille = (3, 3)
         pseudo_labyrinthe_sans_murs = construit_pseudo_labyrinthe_vide(taille)
         self.assertTrue(verifie_connexite(pseudo_labyrinthe_sans_murs))
-
-    def test_verifie_connexite_carré(self):
-        taille = (4, 3)
-        pl2 = construit_pseudo_labyrinthe_vide((4, 3))
-        pl2.get_noeud_par_id((1, 1)).supprime_connexions(
-            (pl2.get_noeud_par_id((0, 1))))
-        pl2.get_noeud_par_id((1, 1)).supprime_connexions(
-            (pl2.get_noeud_par_id((1, 2))))
-        pl2.get_noeud_par_id((1, 1)).supprime_connexions(
-            (pl2.get_noeud_par_id((1, 0))))
-        pl2.get_noeud_par_id((1, 1)).supprime_connexions(
-            (pl2.get_noeud_par_id((2, 1))))
-        self.assertFalse(verifie_connexite(pl2))
 
 
 class TestVerificationsLabyrinthe(unittest.TestCase):
@@ -52,9 +42,7 @@ class TestVerificationsLabyrinthe(unittest.TestCase):
         pseudo_labyrinthe_sans_murs = construit_pseudo_labyrinthe_vide(taille)
         self.assertFalse(verifie_labyrinthe(pseudo_labyrinthe_sans_murs))
 
-@unittest.skip
 class TestConstructions(unittest.TestCase):
-    @unittest.skip
     def test_construit_random_labyrinthe(self):
         taille = (3, 3)
         labyrinthe_construit = construit_random_labyrinthe(taille)
