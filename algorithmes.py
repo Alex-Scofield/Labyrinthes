@@ -55,28 +55,6 @@ def verifie_labyrinthe(pl: PseudoLabyrinthe) -> bool:
     return True
 
 
-# Pour l'instant renvoie PseudoLabyrinthe
-def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
-    '''
-    Construit un labyrinthe random de la taille donée.
-    @param taille: tuple contenant la taille du labyrinthe à construir.
-    @return Labyrinthe random de cette taille.
-    '''
-
-    import random
-
-    pseudo_labyrinthe = PseudoLabyrinthe(taille)
-
-    while not(verifie_labyrinthe(pseudo_labyrinthe)):
-        noeud: Noeud = random.choice(pseudo_labyrinthe.get_noeuds())
-        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pseudo_labyrinthe)) 
-        if voisin_choisi not in noeud.get_connexions():
-            pseudo_labyrinthe.ajoute_murs((noeud, voisin_choisi))
-            if not(verifie_connexite(pseudo_labyrinthe)):
-                noeud.supprime_connexions(voisin_choisi)
-        
-    return pseudo_labyrinthe 
-
 def construit_pseudo_labyrinthe_vide(taille: tuple):
     '''
     Construit un PseudoLabyrinthe où tous les connexions sont faites.
@@ -92,6 +70,50 @@ def construit_pseudo_labyrinthe_vide(taille: tuple):
             noeud.ajoute_connexions(voisin)
     
     return pseudo_labyrinthe
+
+
+def construit_random_pseudo_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
+    '''
+    Construit un labyrinthe random de la taille donée.
+    @param taille: tuple contenant la taille du labyrinthe à construir.
+    @return Labyrinthe random de cette taille.
+    '''
+
+    import random
+
+    pseudo_labyrinthe = construit_pseudo_labyrinthe_vide(taille)
+    
+    nbmurs=random.randint(0,2*taille[0]*taille[1]-taille[0]-taille[1])
+
+    for i in range(nbmurs):
+        noeud: Noeud = random.choice(pseudo_labyrinthe.get_noeuds())
+        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pseudo_labyrinthe)) 
+        pseudo_labyrinthe.ajoute_murs((noeud, voisin_choisi))
+        
+    return pseudo_labyrinthe 
+# Pour l'instant renvoie PseudoLabyrinthe
+
+def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
+    '''
+    Construit un labyrinthe random de la taille donée.
+    @param taille: tuple contenant la taille du labyrinthe à construir.
+    @return Labyrinthe random de cette taille.
+    '''
+
+    import random
+
+    pseudo_labyrinthe = construit_pseudo_labyrinthe_vide(taille)
+
+    while not(verifie_labyrinthe(pseudo_labyrinthe)):
+        noeud: Noeud = random.choice(pseudo_labyrinthe.get_noeuds())
+        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pseudo_labyrinthe)) 
+        if voisin_choisi not in noeud.get_connexions():
+            pseudo_labyrinthe.ajoute_murs((noeud, voisin_choisi))
+            if not(verifie_connexite(pseudo_labyrinthe)):
+                noeud.ajoute_connexions(voisin_choisi)
+        
+    return pseudo_labyrinthe 
+
 
 def construit_matrice_labyrinthes(taille: tuple) -> list:
     '''
