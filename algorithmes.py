@@ -28,28 +28,32 @@ def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe, recursive: bool = Tru
     
     return True
 
+def nb_murs(pl:PseudoLabyrinthe)->int:
+    """
+    Compte le nombre de murs dans un Pseudo-Labyrinthe enceinte excluse
+    @param pl: PseudoLabyrinthe dont on souhaite compter les murs
+    @return int; le nombre de murs de pl
+    """
+    connex=[]
+    visites=[]
+    for noeud in pl.get_noeuds():
+        visites.append(noeud)
+        for connexion in noeud.get_connexions():
+            if connexion not in visites:
+                connex.append(connexion)
+                
+    return 2*pl.get_taille()[0]*pl.get_taille()[1]-pl.get_taille()[0]-pl.get_taille()[1] - len(connex)
 
-def verifie_labyrinthe(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
+def verifie_labyrinthe(pl: PseudoLabyrinthe) -> bool:
     '''
     Vérifie si un PseudoLabyrinthe est un Labyrinthe.
-    @param pseudo_labyrinthe: PseudoLabyrinthe à vérifier.
+    @param pl: PseudoLabyrinthe à vérifier.
     @return bool; true si c'est un labyrinthe, false si non. 
     '''
-
-    if not verifie_connexite(pseudo_labyrinthe):
+    if not verifie_connexite(pl) or nb_murs(pl)!=2*pl.get_taille()[0]*pl.get_taille()[1]-pl.get_taille()[0]-pl.get_taille()[1]-(pl.get_taille()[0]*pl.get_taille()[1]-1):
         return False
-    
-    for noeud in pseudo_labyrinthe.get_noeuds():
-        visites = []
-        for connexion in noeud.get_connexions(): # Cela fonctionne, mais on va parcourir les connexions deux fois.
-            if connexion not in visites:
-                noeud.supprime_connexions(connexion)
-                if verifie_connexite(pseudo_labyrinthe):
-                    return False
-                pseudo_labyrinthe.ajoute_murs((noeud,connexion))
-                visites.append(connexion)
-                
     return True
+
 
 # Pour l'instant renvoie PseudoLabyrinthe
 def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
@@ -142,3 +146,5 @@ def filtre_liste_PseudoLabyrinthe(pseudo_labyrinthes: list):
 
 def get_Labyrinthes(taille: tuple):
     return filtre_liste_PseudoLabyrinthe(get_PseudoLabyrinthes(taille))
+            
+    
