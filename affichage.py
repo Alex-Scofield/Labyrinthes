@@ -60,3 +60,39 @@ def afficheLaby(pl: PseudoLabyrinthe) -> list:
         for line in lines:
             plot += line2d(line)
     return plot
+
+
+def afficheLabyTurt(pl, directions):
+    import turtle
+    t = turtle.Turtle()
+
+    for n in pl.get_noeuds():
+        connexions = n.get_connexions()
+        nid = n.get_id()
+        vectors = [(node.get_id()[0]-nid[0], node.get_id()[1]-nid[1])
+                   for node in connexions]
+        murs = []
+        for v in directions:
+            if v not in vectors:
+                murs.append(directions[directions.index(v)])
+        for m in murs:
+            if (0 <= nid[0]+m[0] < pl.get_taille()[0] and 0 <= nid[1]+m[1] < pl.get_taille()[1]):
+                if n in pl.get_noeud_par_id((nid[0]+m[0], nid[1]+m[1])).get_connexions():
+                    murs.remove(m)
+
+        lines = dessineNoeud(n,murs)
+        print(lines)
+
+    for i in range(len(lines)-1):
+        t.down()
+        t.goto(murs[i][0],murs[i][1])
+        t.up()
+    turtle.mainloop()
+
+directions = [(0, 100), (100, 0), (-100, 0), (0, -100)]
+pl = PseudoLabyrinthe((5,3))
+pl.get_noeud_par_id((0,0)).ajoute_connexions((pl.get_noeud_par_id((0,1))))
+pl.get_noeud_par_id((0,0)).ajoute_connexions((pl.get_noeud_par_id((1,0))))
+
+pl.get_noeud_par_id((4,2)).ajoute_connexions((pl.get_noeud_par_id((3,2))))
+afficheLabyTurt(pl, directions)

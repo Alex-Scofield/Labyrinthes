@@ -169,4 +169,3 @@ def filtre_liste_PseudoLabyrinthe(pseudo_labyrinthes: list):
 def get_Labyrinthes(taille: tuple):
     return filtre_liste_PseudoLabyrinthe(get_PseudoLabyrinthes(taille))
             
-    
