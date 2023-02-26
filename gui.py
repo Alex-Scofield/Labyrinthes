@@ -24,6 +24,7 @@ class App(tk.Frame):
         event.widget["activeforeground"] = "red"
 
     def action_button(self):
+        import pickle
         option = self.combo.get()
         taille = self.entry.get()
         taille = taille.split(",")
@@ -36,7 +37,8 @@ class App(tk.Frame):
             import random
             resultat = random.choice(get_Labyrinthes((M,N)))
         print(resultat)
-        afficheLabyTurt(resultat, directions=[(0, 1), (1, 0), (-1, 0), (0, -1)])
+        with open("pick","wb") as f:
+            pickle.dump(resultat, f)
 
 
 root = tk.Tk()
