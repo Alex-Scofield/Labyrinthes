@@ -114,6 +114,8 @@ class PseudoLabyrinthe():
             noeud2 = arg[1]
             if noeud2 not in noeud1.get_connexions():
                 noeud1.ajoute_connexions(noeud2)
+            if noeud1 not in noeud2.get_connexions():
+                noeud2.ajoute_connexions(noeud1)
 
     def bidirectionalise(self) -> None:
         '''
