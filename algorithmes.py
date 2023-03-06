@@ -104,28 +104,32 @@ def construit_random_pseudo_labyrinthe_supprime(taille:tuple) -> PseudoLabyrinth
     return pl
 
 
-# Pour l'instant renvoie PseudoLabyrinthe
 
-def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
+def construit_random_labyrinthe_supprime(taille: tuple) -> PseudoLabyrinthe:
     '''
     Construit un labyrinthe random de la taille donée.
     @param taille: tuple contenant la taille du labyrinthe à construir.
     @return Labyrinthe random de cette taille.
     '''
 
-    import random
+    pl = PseudoLabyrinthe(taille) 
 
-    pseudo_labyrinthe = construit_pseudo_labyrinthe_vide(taille)
-
-    while not(verifie_labyrinthe(pseudo_labyrinthe)):
-        noeud: Noeud = random.choice(pseudo_labyrinthe.get_noeuds())
-        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pseudo_labyrinthe)) 
-        if voisin_choisi not in noeud.get_connexions():
-            pseudo_labyrinthe.ajoute_murs((noeud, voisin_choisi))
-            if not(verifie_connexite(pseudo_labyrinthe)):
-                noeud.ajoute_connexions(voisin_choisi)
+    
+    for i in range(taille[0]*taille[1]-1):
+        noeud: Noeud = random.choice(pl.get_noeuds())
+        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pl)) 
+        pl.supprime_murs((noeud, voisin_choisi))
+    
+    
+    while not(verifie_labyrinthe(pl)):
+        noeud: Noeud = random.choice(pl.get_noeuds())
+        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pl)) 
+        pl.ajoute_murs((noeud, voisin_choisi))
+        noeud: Noeud2 = random.choice(pl.get_noeuds())
+        voisin_choisi2: Noeud = random.choice(noeud.get_voisins(pl)) 
+        pl.supprime_murs((noeud2, voisin_choisi2))
         
-    return pseudo_labyrinthe 
+    return pl 
 
 
 def construit_matrice_labyrinthes(taille: tuple) -> list:
