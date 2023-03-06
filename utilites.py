@@ -115,7 +115,21 @@ class PseudoLabyrinthe():
             if noeud2 not in noeud1.get_connexions():
                 noeud1.ajoute_connexions(noeud2)
 
+    def bidirectionalise(self) -> None:
+        '''
+        Procédure qui bidirectionalise toutes les connexions entre noeuds du PseudoLabyrinthe.
+        '''
+        for noeud in self.get_noeuds():
+            for connexion in noeud.get_connexions():
+                if noeud not in connexion.get_connexions():
+                    connexion.ajoute_connexions(noeud)
 
+    def supprime_connexions_redoublantes(self) -> None:
+        '''
+        Supprime les connexions rédoublantes dans tous les noeuds du PseudoLabyrinthe.
+        '''
+        for noeud in self.get_noeuds():
+            noeud.supprime_connexions_redoublantes()
 
     def verifie(self):
         '''
@@ -138,6 +152,44 @@ class PseudoLabyrinthe():
         '''
 
         return self.__taille
+
+    def copie(self):
+        '''
+        Méthode qui copie le PseudoLabyrinthe courant.
+        '''
+        pl = PseudoLabyrinthe(self.get_taille)
+        for noeud in self.get_noeuds():
+            for connexion in noeud.get_connexions():
+                pl.get_noeud_par_id(noeud.get_id()).ajoute_connexions(pl.get_noeud_par_id(connexion.get_id()))
+        return pl
+            
+
+    
+    def __eq__(self, autre) -> bool:
+        if self.get_taille() != autre.get_taille():
+            return False
+        copie_bidirectionelle = self.copie.bidirectionalise()
+        copie_autre = autre.copie.bidirectionalise()
+        for i in range(self.get_taille()[0]):
+            for j in range(self.get_taille()[1]):
+                noeud_self = copie_bidirectionelle.get_noeud_par_id((i, j))
+                noeud_autre = copie_autre.get_noeud_par_id()
+                liste_connexions_self = []
+                liste_connexions_autre = []
+                for connexion in noeud_self.get_connexions():
+                    liste_connexions_self.append(connexion.get_id())
+                for connexion in noeud_autre.get_connexions():
+                    liste_connexions_autre.append(connexion.get_id())
+                
+                if set(liste_connexions_self)!=set(liste_connexions_autre):
+                    return False
+        return True
+
+    def __ne__(self, autre):
+        return not(self==autre)
+
+
+        
 
 
 class Labyrinthe(PseudoLabyrinthe):
@@ -208,6 +260,12 @@ class Noeud():
                 raise ValueError(
                     f"Noeud {arg.get_id()} n'est pas connecté à {self.__id}.")
             self.__connexions.remove(arg)
+    
+    def supprime_connexions_redoublantes(self) -> None:
+        '''
+        Supprime les connexions rédoublantes du Noeud.
+        '''
+        self.__connexions = list(set(self.get_connexions()))
 
     def get_voisins(self, pseudo_labyrinthe: PseudoLabyrinthe) -> list:
         '''

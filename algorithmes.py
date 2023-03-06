@@ -73,7 +73,7 @@ def construit_pseudo_labyrinthe_vide(taille: tuple):
     return pseudo_labyrinthe
 
 
-def construit_random_Pseudolabyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe:
+def construit_random_pseudo_labyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe:
     '''
     Construit un Pseudolabyrinthe random de la taille donée en ajoutant des murs.
     @param taille: tuple contenant la taille du labyrinthe à construire.
@@ -90,7 +90,7 @@ def construit_random_Pseudolabyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe:
 
     return pl
 
-def construit_random_pseudolabyrinthes_supprime(taille:tuple) -> PseudoLabyrinthe:
+def construit_random_pseudo_labyrinthe_supprime(taille:tuple) -> PseudoLabyrinthe:
     '''
     Construit un PseudoLabyrinthe random, de la taille donée.
     @param taille: tuple, taille du PseudoLabyrinthe.
