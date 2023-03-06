@@ -95,15 +95,27 @@ class PseudoLabyrinthe():
         Procédure qui ajoute un mur entre les noeuds donnés comme paramètres deux par deux.
         @param *args: tuples de Noeuds.
         '''
-
         for arg in args:
-
             noeud1 = arg[0]
             noeud2 = arg[1]
             if noeud2 in noeud1.get_connexions():
                 noeud1.supprime_connexions(noeud2)
             if noeud1 in noeud2.get_connexions():
                 noeud2.supprime_connexions(noeud1)
+    
+    # On peut optimiser cette fonction si nécessaire plus tard.
+    def supprime_murs(self, *args) -> None:
+        '''
+        Procédure qui supprime le mur eventuel entre deux noeuds.
+        @param *args: tuples de Noeuds.
+        '''
+        for arg in args:
+            noeud1 = arg[0]
+            noeud2 = arg[1]
+            if noeud2 not in noeud1.get_connexions():
+                noeud1.ajoute_connexions(noeud2)
+
+
 
     def verifie(self):
         '''

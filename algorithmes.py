@@ -3,6 +3,7 @@ Algorithmes.
 '''
 
 from utilites import *
+import random
 
 def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe, recursive: bool = True) -> bool:
     '''
@@ -88,6 +89,21 @@ def construit_random_Pseudolabyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe:
         pl.ajoute_murs((noeud, voisin_choisi))
 
     return pl
+
+def construit_random_pseudolabyrinthes_supprime(taille:tuple) -> PseudoLabyrinthe:
+    '''
+    Construit un PseudoLabyrinthe random, de la taille donée.
+    @param taille: tuple, taille du PseudoLabyrinthe.
+    @return PseudoLabyrinthe random de la taille donée.
+    '''
+    pl = PseudoLabyrinthe(taille)
+    nmurs = random.randint(2*taille[0]*taille[1]-taille[0]-taille[1])
+    for noeud in pl.get_noeuds():
+        voisin = random.choice(noeud.get_voisins(pl))
+        pl.supprime_murs((noeud, voisin))
+    return pl
+
+
 # Pour l'instant renvoie PseudoLabyrinthe
 
 def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
