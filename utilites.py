@@ -157,7 +157,7 @@ class PseudoLabyrinthe():
         '''
         Méthode qui copie le PseudoLabyrinthe courant.
         '''
-        pl = PseudoLabyrinthe(self.get_taille)
+        pl = PseudoLabyrinthe(self.get_taille())
         for noeud in self.get_noeuds():
             for connexion in noeud.get_connexions():
                 pl.get_noeud_par_id(noeud.get_id()).ajoute_connexions(pl.get_noeud_par_id(connexion.get_id()))
@@ -168,11 +168,13 @@ class PseudoLabyrinthe():
     def __eq__(self, autre) -> bool:
         if self.get_taille() != autre.get_taille():
             return False
-        copie_bidirectionelle = self.copie.bidirectionalise()
-        copie_autre = autre.copie.bidirectionalise()
+        copie_self = self.copie()
+        copie_self.bidirectionalise()
+        copie_autre = autre.copie()
+        copie_autre.bidirectionalise()
         for i in range(self.get_taille()[0]):
             for j in range(self.get_taille()[1]):
-                noeud_self = copie_bidirectionelle.get_noeud_par_id((i, j))
+                noeud_self = copie_self.get_noeud_par_id((i, j))
                 noeud_autre = copie_autre.get_noeud_par_id()
                 liste_connexions_self = []
                 liste_connexions_autre = []
@@ -187,9 +189,6 @@ class PseudoLabyrinthe():
 
     def __ne__(self, autre):
         return not(self==autre)
-
-
-        
 
 
 class Labyrinthe(PseudoLabyrinthe):
