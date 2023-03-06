@@ -72,25 +72,22 @@ def construit_pseudo_labyrinthe_vide(taille: tuple):
     return pseudo_labyrinthe
 
 
-def construit_random_pseudo_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
+def construit_random_Pseudolabyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe:
     '''
-    Construit un labyrinthe random de la taille donée.
-    @param taille: tuple contenant la taille du labyrinthe à construir.
-    @return Labyrinthe random de cette taille.
+    Construit un Pseudolabyrinthe random de la taille donée en ajoutant des murs.
+    @param taille: tuple contenant la taille du labyrinthe à construire.
+    @return PseudoLabyrinthe random de cette taille.
     '''
 
-    import random
+    pl = construit_pseudo_labyrinthe_vide(taille)
+    nbmurs= random.randint(0,2*taille[0]*taille[1]-taille[0]-taille[1])
 
-    pseudo_labyrinthe = construit_pseudo_labyrinthe_vide(taille)
-    
-    nbmurs=random.randint(0,2*taille[0]*taille[1]-taille[0]-taille[1])
+    for i in range(len(nbmurs)):
+        noeud: Noeud = random.choice(pl.get_noeuds())
+        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pl)) 
+        pl.ajoute_murs((noeud, voisin_choisi))
 
-    for i in range(nbmurs):
-        noeud: Noeud = random.choice(pseudo_labyrinthe.get_noeuds())
-        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pseudo_labyrinthe)) 
-        pseudo_labyrinthe.ajoute_murs((noeud, voisin_choisi))
-        
-    return pseudo_labyrinthe 
+    return pl
 # Pour l'instant renvoie PseudoLabyrinthe
 
 def construit_random_labyrinthe(taille: tuple) -> PseudoLabyrinthe:
