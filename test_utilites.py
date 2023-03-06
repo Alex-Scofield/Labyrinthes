@@ -27,9 +27,9 @@ class TestEgaliteLabyrinthes(unittest.TestCase):
 
     def test_egaux_un_mur(self):
         pl1 = PseudoLabyrinthe(TAILLE_TEST)
-        pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id(0,1)))
+        pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id((0,1))))
         pl2 = PseudoLabyrinthe(TAILLE_TEST)
-        pl2.ajoute_murs((pl2.get_noeud_par_id((0,0)), pl2.get_noeud_par_id(0,1)))
+        pl2.ajoute_murs((pl2.get_noeud_par_id((0,0)), pl2.get_noeud_par_id((0,1))))
         self.assertEqual(pl1, pl2)
 
     def test_differents_vide_rempli(self):
@@ -39,9 +39,9 @@ class TestEgaliteLabyrinthes(unittest.TestCase):
 
     def test_differents_un_mur(self):
         pl1 = PseudoLabyrinthe(TAILLE_TEST)
-        pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id(1,0)))
+        pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id((1,0))))
         pl2 = PseudoLabyrinthe(TAILLE_TEST)
-        pl2.ajoute_murs((pl2.get_noeud_par_id((0,0)), pl2.get_noeud_par_id(0,1)))
+        pl2.ajoute_murs((pl2.get_noeud_par_id((0,0)), pl2.get_noeud_par_id((0,1))))
         self.assertNotEqual(pl1, pl2)
     
     def test_different_sizes(self):

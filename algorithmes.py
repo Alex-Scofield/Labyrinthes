@@ -122,11 +122,11 @@ def construit_random_labyrinthe_supprime(taille: tuple) -> PseudoLabyrinthe:
     
     
     while not(verifie_labyrinthe(pl)):
-        noeud: Noeud = random.choice(pl.get_noeuds())
-        voisin_choisi: Noeud = random.choice(noeud.get_voisins(pl)) 
-        pl.ajoute_murs((noeud, voisin_choisi))
-        noeud: Noeud2 = random.choice(pl.get_noeuds())
-        voisin_choisi2: Noeud = random.choice(noeud.get_voisins(pl)) 
+        noeud3: Noeud = random.choice(pl.get_noeuds())
+        voisin_choisi3: Noeud = random.choice(noeud3.get_voisins(pl)) 
+        pl.ajoute_murs((noeud3, voisin_choisi3))
+        noeud2: Noeud = random.choice(pl.get_noeuds())
+        voisin_choisi2: Noeud = random.choice(noeud2.get_voisins(pl)) 
         pl.supprime_murs((noeud2, voisin_choisi2))
         
     return pl 

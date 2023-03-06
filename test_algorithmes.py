@@ -63,10 +63,9 @@ class TestVerificationsLabyrinthe(unittest.TestCase):
 
 
 class TestConstructions(unittest.TestCase):
-    # @unittest.skip
     def test_construit_random_labyrinthe(self):
         taille = (2, 2)
-        labyrinthe_construit = construit_random_labyrinthe(taille)
+        labyrinthe_construit = construit_random_labyrinthe_supprime(taille)
         self.assertTrue(verifie_labyrinthe(labyrinthe_construit))
 
     def test_construit_pseudo_labyrinthe_vide(self):

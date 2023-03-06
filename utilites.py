@@ -114,6 +114,8 @@ class PseudoLabyrinthe():
             noeud2 = arg[1]
             if noeud2 not in noeud1.get_connexions():
                 noeud1.ajoute_connexions(noeud2)
+            if noeud1 not in noeud2.get_connexions():
+                noeud2.ajoute_connexions(noeud1)
 
     def bidirectionalise(self) -> None:
         '''
@@ -175,7 +177,7 @@ class PseudoLabyrinthe():
         for i in range(self.get_taille()[0]):
             for j in range(self.get_taille()[1]):
                 noeud_self = copie_self.get_noeud_par_id((i, j))
-                noeud_autre = copie_autre.get_noeud_par_id()
+                noeud_autre = copie_autre.get_noeud_par_id((i,j))
                 liste_connexions_self = []
                 liste_connexions_autre = []
                 for connexion in noeud_self.get_connexions():
