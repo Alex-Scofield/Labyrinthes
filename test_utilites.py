@@ -14,6 +14,41 @@ class TestInitialisationPseudoLabyrinthe(unittest.TestCase):
         for noeud in pseudo_labyrinthe.get_noeuds():
             self.assertTrue(noeud.get_connexions()==[])
 
+class TestEgaliteLabyrinthes(unittest.TestCase):
+    def test_egaux_vides(self):
+        pl1 = construit_pseudo_labyrinthe_vide(TAILLE_TEST)
+        pl2 = construit_pseudo_labyrinthe_vide(TAILLE_TEST)
+        self.assertEqual(pl1, pl2)
+    
+    def test_egaux_remplis(self):
+        pl1 = PseudoLabyrinthe(TAILLE_TEST)
+        pl2 = PseudoLabyrinthe(TAILLE_TEST)
+        self.assertEqual(pl1,pl2)
+
+    def test_egaux_un_mur(self):
+        pl1 = PseudoLabyrinthe(TAILLE_TEST)
+        pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id(0,1)))
+        pl2 = PseudoLabyrinthe(TAILLE_TEST)
+        pl2.ajoute_murs((pl2.get_noeud_par_id((0,0)), pl2.get_noeud_par_id(0,1)))
+        self.assertEqual(pl1, pl2)
+
+    def test_differents_vide_rempli(self):
+        pl1 = construit_pseudo_labyrinthe_vide(TAILLE_TEST)
+        pl2 = PseudoLabyrinthe(TAILLE_TEST)
+        self.assertNotEqual(pl1, pl2)
+
+    def test_differents_un_mur(self):
+        pl1 = PseudoLabyrinthe(TAILLE_TEST)
+        pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id(1,0)))
+        pl2 = PseudoLabyrinthe(TAILLE_TEST)
+        pl2.ajoute_murs((pl2.get_noeud_par_id((0,0)), pl2.get_noeud_par_id(0,1)))
+        self.assertNotEqual(pl1, pl2)
+    
+    def test_different_sizes(self):
+        pl1 = PseudoLabyrinthe((3,2))
+        pl2 = PseudoLabyrinthe((3,3))
+        self.assertNotEqual(pl1,pl2)
+
 class TestGetNoeudParId(unittest.TestCase):
     def setUp(self) -> None:
         self.pseudo_labyrinthe = PseudoLabyrinthe((4,4))
