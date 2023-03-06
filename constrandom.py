@@ -2,7 +2,8 @@ from utilites import *
 from algorithmes import *
 import random
 
-def construit_random_pseudolabyrinthes_supprime(taille:tuple) -> PseudoLabyrinthe:
+
+def construit_random_pseudolabyrinthes_supprime(taille: tuple) -> PseudoLabyrinthe:
     '''
     Construit un PseudoLabyrinthe random, de la taille donée.
     @param taille: tuple, taille du PseudoLabyrinthe.
