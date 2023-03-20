@@ -12,14 +12,14 @@ class PseudoLabyrinthe():
 
     Parameters
     ----------
-    taille: tuple
+    taille : tuple
         Taille du PseudoLabyrinthe à construir.
 
     Attributes
     ----------
-    atribute taille: tuple
+    taille : tuple
         Contient les dimensions du pseudo_labyrinthes.
-    __noeuds: list of Noeud
+    __noeuds : list of Noeud
         Liste de Noeuds.
     '''
 
@@ -37,7 +37,7 @@ class PseudoLabyrinthe():
 
         Parameters
         ----------
-        noeuds: list of Noeud
+        noeuds : list of Noeud
             Liste de noeuds à utiliser.
 
         Raises
@@ -55,7 +55,7 @@ class PseudoLabyrinthe():
 
         Parameters
         ----------
-        id: tuple
+        id : tuple
             Position du Noeud à chercher
 
         Returns
@@ -126,6 +126,21 @@ class PseudoLabyrinthe():
                 if abs(noeud_id[0]-connexion_id[0]) > 1 or abs(noeud_id[1]-connexion_id[1]) > 1:
                     raise ValueError(
                         f"Connexion directe entre deux noeuds pas contigus.")
+    
+    def verifie_bidirectionel(self) -> None:
+        '''
+        Vérifie qu'un PseudoLabyrinthe est bidirectionel.
+
+        Raises
+        ------
+        ValueError
+            Si le PseudoLabyrinthe courant n'est pas bidirectionel.
+        '''
+
+        for noeud in self.get_noeuds():
+            for connexion in noeud.get_connexions():
+                if noeud not in connexion.get_connexions():
+                    raise ValueError("PseudoLabyrinthe non bidirectionel.")
 
     def ajoute_murs(self, *args) -> None:
         '''
@@ -133,7 +148,7 @@ class PseudoLabyrinthe():
         
         Parameters
         ----------
-        *args: tuple of Noeud
+        *args : tuple of Noeud
             Tuples de Noeuds à connecter deux par deux.
         '''
         for arg in args:
@@ -150,7 +165,7 @@ class PseudoLabyrinthe():
 
         Parameters
         ----------
-        *args: tuple of Noeud
+        *args : tuple of Noeud
             Tuples de Noeuds dont on veut supprimer le mur.
         '''
         for arg in args:
@@ -164,6 +179,10 @@ class PseudoLabyrinthe():
     def bidirectionalise(self) -> None:
         '''
         Procédure qui bidirectionalise toutes les connexions entre noeuds du PseudoLabyrinthe.
+
+        Notes
+        -----
+        Ne devrait pas être nécessaire avec l'implementation bidirectionelle.
         '''
         for noeud in self.get_noeuds():
             for connexion in noeud.get_connexions():
@@ -172,7 +191,7 @@ class PseudoLabyrinthe():
 
     def supprime_connexions_redoublantes(self) -> None:
         '''
-        Supprime les connexions rédoublantes dans tous les noeuds du PseudoLabyrinthe.
+        Supprime les connexions rédoublantes dans tous les noeuds du PseudoLabyrinthe courant.
         '''
         for noeud in self.get_noeuds():
             noeud.supprime_connexions_redoublantes()
@@ -188,6 +207,7 @@ class PseudoLabyrinthe():
         '''
         self.verifie_noeuds()
         self.verifie_connexions()
+        self.verifie_bidirectionel()
 
     def get_noeuds(self):
         '''
@@ -204,6 +224,10 @@ class PseudoLabyrinthe():
         '''
         Renvoie la taille du PseudoLabyrinthe.
         
+        Returns
+        -------
+        tuple
+            self.__taille
         '''
 
         return self.__taille
@@ -225,6 +249,14 @@ class PseudoLabyrinthe():
             
     
     def __eq__(self, autre) -> bool:
+        '''
+        Vérifie si deux PseudoLabyrinthes sont isomorphes.
+
+        Returns
+        -------
+        bool
+            True s'ils sont isomorphes, False sinon.
+        '''
         if self.get_taille() != autre.get_taille():
             return False
         copie_self = self.copie()
@@ -252,12 +284,19 @@ class PseudoLabyrinthe():
 class Noeud():
     '''
     Un Noeud est un objet qui se correspond à une case d'un PseudoLabyrinthe.
+    
+    Parametres
+    ----------
+    id : tuple 
+        Contient la position du noeud.
+    connexions : liste de noeuds
+        Noeuds connexes au Noeud courant
 
     Attributes
     ----------
-    __id: tuple 
+    __id : tuple 
         Contient la position du noeud.
-    __connexions: liste de noeuds
+    __connexions : liste de noeuds
         Noeuds connexes au Noeud courant
     '''
 
@@ -268,6 +307,11 @@ class Noeud():
     def get_id(self) -> tuple:
         '''
         Getter pour self.__id.
+
+        Returns
+        -------
+        tuple
+            self.__id
         '''
 
         return self.__id
@@ -275,17 +319,27 @@ class Noeud():
     def get_connexions(self) -> list:
         '''
         Getter pour self.__connexions.
+
+        Returns
+        -------
+        list
+            self.__connexions
         '''
 
         return self.__connexions
 
-    # Ajouter des vérifications.
 
     def ajoute_connexions(self, *args):
         '''
         Ajoute des connexions à self.__connexions. Vérifie que les connexions sont valides.
+
+        Notes
+        -----
         Dans la plupart des cas utiliser ajoute_murs et ne pas ajoute_connexions.
-        @param *args: Liste d'autres Noeud.
+
+        Parameters
+        ----------
+        *args : list of Noeud
         '''
 
         TUPLES_VALIDES = [(1, 0), (-1, 0), (0, 1), (0, -1)]
@@ -306,7 +360,10 @@ class Noeud():
     def supprime_connexions(self, *args) -> None:
         '''
         Supprime des connexions de self.__connexions.
-        @param *args: Liste d'autres Noeud.
+
+        Parametres
+        ----------
+        *args : Liste of Noeud
         '''
 
         for arg in args:
@@ -324,8 +381,16 @@ class Noeud():
     def get_voisins(self, pseudo_labyrinthe: PseudoLabyrinthe) -> list:
         '''
         Trouve les voisins du noeud dans le PseudoLabyrinthe donné comme paramètre.
-        @param pseudo_labyrinthe: PseudoLabyrinthe où se trouve le Noeud.
-        @return list contenant les noeuds voisins du noeud en question dans pseudo_labyrinthe.
+
+        Parameters
+        ----------
+        pseudo_labyrinthe: PseudoLabyrinthe 
+            PseudoLabyrinthe où se trouve le Noeud.
+
+        Returns
+        -------
+        list 
+            Contient les noeuds voisins du noeud en question dans pseudo_labyrinthe.
         '''
 
         voisins = []
