@@ -13,6 +13,8 @@ Welcome to Labyrinthes's documentation!
 
 modules.rst
 Labyrinthes.rst
+algorithmes
+utilites
 
 
 
