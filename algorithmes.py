@@ -7,9 +7,17 @@ import random
 
 def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe, recursive: bool = True) -> bool:
     '''
-    Application de l'algorithme bfs pour vérifier si un PseudoLabyrinthe est connexe.
-    @param pseudo_labyrinthe: labyrinthe à vérifier.
-    @return bool: true si le labyrinthe est connexe, false si non.
+    Application de l'algorithme bfs pour vérifier si un Pseudo-Labyrinthe est connexe.
+    
+    Parameters
+    ----------
+    pseudo_labyrinthe : PseudoLabyrinthe
+        Labyrinthe à vérifier.
+    
+    Returns
+    -------
+    bool 
+        True si le labyrinthe est connexe, False sinon.
     '''
 
     visites = []
@@ -31,9 +39,17 @@ def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe, recursive: bool = Tru
 
 def nb_murs(pl:PseudoLabyrinthe)->int:
     """
-    Compte le nombre de murs dans un Pseudo-Labyrinthe enceinte excluse
-    @param pl: PseudoLabyrinthe dont on souhaite compter les murs
-    @return int; le nombre de murs de pl
+    Compte le nombre de murs dans un Pseudo-Labyrinthe, enceinte exclue
+
+    Parameters
+    ----------
+    pl : PseudoLabyrinthe 
+        Pseudo-labyrinthe dont on souhaite compter les murs
+    
+    Returns
+    -------
+    int
+        Le nombre de murs de pl
     """
     connex=[]
     visites=[]
@@ -48,8 +64,15 @@ def nb_murs(pl:PseudoLabyrinthe)->int:
 def verifie_labyrinthe(pl: PseudoLabyrinthe) -> bool:
     '''
     Vérifie si un PseudoLabyrinthe est un Labyrinthe.
-    @param pl: PseudoLabyrinthe à vérifier.
-    @return bool; true si c'est un labyrinthe, false si non. 
+
+    Parameters
+    ----------
+    pl : PseudoLabyrinthe 
+
+    Returns
+    -------
+    bool
+        True si c'est un labyrinthe, False si non. 
     '''
     if not verifie_connexite(pl) or nb_murs(pl)!=2*pl.get_taille()[0]*pl.get_taille()[1]-pl.get_taille()[0]-pl.get_taille()[1]-(pl.get_taille()[0]*pl.get_taille()[1]-1):
         return False
@@ -58,9 +81,17 @@ def verifie_labyrinthe(pl: PseudoLabyrinthe) -> bool:
 
 def construit_pseudo_labyrinthe_vide(taille: tuple):
     '''
-    Construit un PseudoLabyrinthe où tous les connexions sont faites.
-    @param taille: tuple contenant la taille du PseudoLabyrinthe à construire.
-    @return PseudoLabyrinthe sans murs.
+    Construit un PseudoLabyrinthe dans lequel toutes les connexions sont faites.
+
+    Parameters
+    ----------
+    taille : tuple 
+        Tuple contenant la taille du PseudoLabyrinthe à construire.
+    
+    Returns
+    -------
+    PseudoLabyrinthe
+        Un Pseudo-labyrinthe sans murs.
     '''
 
     pseudo_labyrinthe = PseudoLabyrinthe(taille)
@@ -76,8 +107,15 @@ def construit_pseudo_labyrinthe_vide(taille: tuple):
 def construit_random_pseudo_labyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe:
     '''
     Construit un Pseudolabyrinthe random de la taille donée en ajoutant des murs.
-    @param taille: tuple contenant la taille du labyrinthe à construire.
-    @return PseudoLabyrinthe random de cette taille.
+
+    Parameters
+    ----------
+    taille : tuple 
+        Un tuple contenant la taille du labyrinthe à construire.
+
+    Returns
+    -------
+    PseudoLabyrinthe random de cette taille.
     '''
 
     pl = construit_pseudo_labyrinthe_vide(taille)
@@ -92,9 +130,17 @@ def construit_random_pseudo_labyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe
 
 def construit_random_pseudo_labyrinthe_supprime(taille:tuple) -> PseudoLabyrinthe:
     '''
-    Construit un PseudoLabyrinthe random, de la taille donée.
-    @param taille: tuple, taille du PseudoLabyrinthe.
-    @return PseudoLabyrinthe random de la taille donée.
+    Construit un Pseudo-labyrinthe random, de taille donnée.
+
+    Parameters
+    ----------
+    taille : tuple
+        taille du PseudoLabyrinthe.
+
+    Returns
+    -------
+    PseudoLabyrinthe 
+        pseudo-labyrinthe random de la taille voulue.
     '''
     pl = PseudoLabyrinthe(taille)
     nmurs = random.randint(2*taille[0]*taille[1]-taille[0]-taille[1])
@@ -107,9 +153,17 @@ def construit_random_pseudo_labyrinthe_supprime(taille:tuple) -> PseudoLabyrinth
 
 def construit_random_labyrinthe_supprime(taille: tuple) -> PseudoLabyrinthe:
     '''
-    Construit un labyrinthe random de la taille donée.
-    @param taille: tuple contenant la taille du labyrinthe à construir.
-    @return Labyrinthe random de cette taille.
+    Construit un labyrinthe random de taille donnée.
+
+    Parameters
+    ----------
+    taille : tuple 
+        Un tuple contenant la taille du labyrinthe à construire.
+    
+    Returns
+    -------
+    PseudoLabyrinthe
+        Un labyrinthe random de cette taille.
     '''
 
     pl = PseudoLabyrinthe(taille) 
@@ -135,8 +189,16 @@ def construit_random_labyrinthe_supprime(taille: tuple) -> PseudoLabyrinthe:
 def construit_matrice_labyrinthes(taille: tuple) -> list:
     '''
     Construit tous les PseudoLabyrinthes d'une taille donnée.
-    @param taille: taille des PseudoLabyrinthe à construir
-    @return list avec tous les PseudoLabyrinthes en forme de matrice de murs valides de la taille donée.
+
+    Parameters
+    ----------
+    taille : tuple
+        Taille des pseudo-labyrinthes à construire.
+        
+    Returns
+    -------
+    list 
+        Une liste contenant tous les PseudoLabyrinthes sous forme de matrice de murs valides de la taille donnée.
     '''
 
     from itertools import chain, combinations
@@ -157,9 +219,20 @@ def construit_matrice_labyrinthes(taille: tuple) -> list:
 
 def murs_to_PseudoLabyrinthe(collection_murs: tuple, taille:tuple):
     '''
-    Convert une collection de murs en des PseudoLabyrinthes.
-    @param collection_murs: tuple contenant les murs à ajouter.
-    @param taille: taille du PseudoLabyrinthe.
+    Converti une collection de murs en des pseudo-labyrinthes.
+
+    Parameters
+    ----------
+    collection_murs: tuple 
+        Un tuple contenant les murs à ajouter.
+    
+    taille : tuple
+        taille du pseudo-labyrinthe.
+
+    Returns
+    -------
+    PseudoLabyrinthe
+        Le pseudo-labyrinthe construit à partir de collection_murs.
     '''
 
     pseudo_labyrinthe = construit_pseudo_labyrinthe_vide(taille)
@@ -170,6 +243,19 @@ def murs_to_PseudoLabyrinthe(collection_murs: tuple, taille:tuple):
     return pseudo_labyrinthe
 
 def get_PseudoLabyrinthes(taille: tuple):
+    '''
+    Transforme les éléments de la matrice de murs de construit_matrice_labyrinthe en pseudo-labyrinthes pour une taille donnée.
+
+    Parameters
+    ----------
+    taille : tuple
+        Taille des pseudo-labyrinthes à construire.
+
+    Returns
+    -------
+    list
+        liste des pseudo-labyrinthes construits
+    '''
     matrice = construit_matrice_labyrinthes(taille)
     liste = []
     for pl in matrice:
@@ -177,6 +263,19 @@ def get_PseudoLabyrinthes(taille: tuple):
     return liste
 
 def filtre_liste_PseudoLabyrinthe(pseudo_labyrinthes: list):
+    '''
+    Extrait les labyrinthes d'une liste de pseudo-labyrinthes.
+
+    Parameters
+    ----------
+    pseudo-labyrinthes : list
+        Une liste de pseudo-labyrinthes
+    
+    Returns
+    -------
+    list
+        Une liste contenant les labyrinthes de pseudo_labyrinthes
+    '''
     liste_labyrinthes = []
     for pl in pseudo_labyrinthes:
         if verifie_labyrinthe(pl):
@@ -184,5 +283,18 @@ def filtre_liste_PseudoLabyrinthe(pseudo_labyrinthes: list):
     return liste_labyrinthes
 
 def get_Labyrinthes(taille: tuple):
+    '''
+    Consruit tous les labyrinthes pour une taille donnée.
+
+    Parameters
+    ----------
+    taille : tuple
+        Taille des labyrinthes à construire
+
+    Returns
+    -------
+    list
+        Une liste contenant tous les labyrinthes de taille taille. 
+    '''
     return filtre_liste_PseudoLabyrinthe(get_PseudoLabyrinthes(taille))
             
