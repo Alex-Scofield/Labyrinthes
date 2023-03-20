@@ -4,5 +4,5 @@ Labyrinthes
 .. toctree::
    :maxdepth: 4
 
-   Labyrinthes.algorithmes
-   Labyrinthes.utilites
+   Labyrinthes.algorithmes.py
+   Labyrinthes.utilites.py
