@@ -6,6 +6,8 @@
 Welcome to Labyrinthes's documentation!
 =======================================
 
+.. include:: modules.rst
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
