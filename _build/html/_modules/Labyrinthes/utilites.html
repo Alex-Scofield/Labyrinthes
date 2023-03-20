@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Labyrinthes.utilites &#8212; Documentation Labyrinthes 1</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Code source de Labyrinthes.utilites</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Construction de structures de données utiles.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">DIRECTIONS</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+
+
+<div class="viewcode-block" id="PseudoLabyrinthe"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe">[docs]</a><span class="k">class</span> <span class="nc">PseudoLabyrinthe</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Un PseudoLabyrinthe de taille m*n est une graphe avec m*n noeuds où chaque</span>
+<span class="sd">    noeud ne peut se connecter qu&#39;à ses voisins.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    taille : tuple</span>
+<span class="sd">        Taille du PseudoLabyrinthe à construir.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    taille : tuple</span>
+<span class="sd">        Contient les dimensions du pseudo_labyrinthes.</span>
+<span class="sd">    __noeuds : list of Noeud</span>
+<span class="sd">        Liste de Noeuds.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taille</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__taille</span> <span class="o">=</span> <span class="n">taille</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Noeud</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">connexions</span><span class="o">=</span><span class="p">[]))</span>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.construit"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.construit">[docs]</a>    <span class="k">def</span> <span class="nf">construit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noeuds</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Construit un PseudoLabyrinthe à partir d&#39;une liste de Noeuds.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        noeuds : list of Noeud</span>
+<span class="sd">            Liste de noeuds à utiliser.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Si le résultat n&#39;est pas un PseudoLabyrinthe valide.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="n">noeuds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verifie</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.get_noeud_par_id"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.get_noeud_par_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_noeud_par_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Renvoie le Noeud se trouvant à la position id.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id : tuple</span>
+<span class="sd">            Position du Noeud à chercher</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Noeud</span>
+<span class="sd">            Noeud à la position demandée.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Si l&#39;id n&#39;est pas valide.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">id</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">id</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2"> n&#39;est pas une position valide.&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">id</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="k">return</span> <span class="n">noeud</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.verifie_noeuds"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.verifie_noeuds">[docs]</a>    <span class="k">def</span> <span class="nf">verifie_noeuds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Vérifie que les Noeud de self.__noeuds ont des id valides, et qu&#39;ils remplissent</span>
+<span class="sd">        le PseudoLabyrinthe.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Si les conditions ne sont pas satisfaites.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+            <span class="n">noeud_id</span> <span class="o">=</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">noeud_id</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">noeud_id</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">noeud_id</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;La position de </span><span class="si">{</span><span class="n">noeud</span><span class="si">}</span><span class="s2"> n&#39;est pas valide.&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="n">trouve</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__taille</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
+                <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+                        <span class="n">trouve</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">trouve</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il reste de noeuds à placer.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.verifie_connexions"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.verifie_connexions">[docs]</a>    <span class="k">def</span> <span class="nf">verifie_connexions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Vérifie que les connexions entre les noeuds de self.__noeuds sont valides.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Si les connexions ne sont pas possibles.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">connexion</span> <span class="ow">in</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="n">noeud_id</span> <span class="o">=</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
+                <span class="n">connexion_id</span> <span class="o">=</span> <span class="n">connexion</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">noeud_id</span> <span class="o">==</span> <span class="n">connexion_id</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">noeud</span><span class="si">}</span><span class="s2"> est connexe à lui-même.&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">noeud_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">connexion_id</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">noeud_id</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">connexion_id</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Connexion directe entre deux noeuds pas contigus.&quot;</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="PseudoLabyrinthe.verifie_bidirectionel"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.verifie_bidirectionel">[docs]</a>    <span class="k">def</span> <span class="nf">verifie_bidirectionel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Vérifie qu&#39;un PseudoLabyrinthe est bidirectionel.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Si le PseudoLabyrinthe courant n&#39;est pas bidirectionel.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_noeuds</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">connexion</span> <span class="ow">in</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">noeud</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">connexion</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PseudoLabyrinthe non bidirectionel.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.ajoute_murs"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.ajoute_murs">[docs]</a>    <span class="k">def</span> <span class="nf">ajoute_murs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Procédure qui ajoute un mur entre les noeuds donnés comme paramètres deux par deux.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args : tuple of Noeud</span>
+<span class="sd">            Tuples de Noeuds à connecter deux par deux.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">noeud1</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">noeud2</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">noeud2</span> <span class="ow">in</span> <span class="n">noeud1</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="n">noeud1</span><span class="o">.</span><span class="n">supprime_connexions</span><span class="p">(</span><span class="n">noeud2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">noeud1</span> <span class="ow">in</span> <span class="n">noeud2</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="n">noeud2</span><span class="o">.</span><span class="n">supprime_connexions</span><span class="p">(</span><span class="n">noeud1</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="PseudoLabyrinthe.supprime_murs"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.supprime_murs">[docs]</a>    <span class="k">def</span> <span class="nf">supprime_murs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Procédure qui supprime le mur eventuel entre deux noeuds.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args : tuple of Noeud</span>
+<span class="sd">            Tuples de Noeuds dont on veut supprimer le mur.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">noeud1</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">noeud2</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">noeud2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">noeud1</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="n">noeud1</span><span class="o">.</span><span class="n">ajoute_connexions</span><span class="p">(</span><span class="n">noeud2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">noeud1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">noeud2</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="n">noeud2</span><span class="o">.</span><span class="n">ajoute_connexions</span><span class="p">(</span><span class="n">noeud1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.bidirectionalise"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.bidirectionalise">[docs]</a>    <span class="k">def</span> <span class="nf">bidirectionalise</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Procédure qui bidirectionalise toutes les connexions entre noeuds du PseudoLabyrinthe.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Ne devrait pas être nécessaire avec l&#39;implementation bidirectionelle.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_noeuds</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">connexion</span> <span class="ow">in</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">noeud</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">connexion</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                    <span class="n">connexion</span><span class="o">.</span><span class="n">ajoute_connexions</span><span class="p">(</span><span class="n">noeud</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.supprime_connexions_redoublantes"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.supprime_connexions_redoublantes">[docs]</a>    <span class="k">def</span> <span class="nf">supprime_connexions_redoublantes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Supprime les connexions rédoublantes dans tous les noeuds du PseudoLabyrinthe courant.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_noeuds</span><span class="p">():</span>
+            <span class="n">noeud</span><span class="o">.</span><span class="n">supprime_connexions_redoublantes</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.verifie"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.verifie">[docs]</a>    <span class="k">def</span> <span class="nf">verifie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Vérifie que l&#39;objet courant est un PseudoLabyrinthe valide.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Si le PseudoLabyrinthe n&#39;est pas valide.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verifie_noeuds</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verifie_connexions</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verifie_bidirectionel</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.get_noeuds"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.get_noeuds">[docs]</a>    <span class="k">def</span> <span class="nf">get_noeuds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Getter pour la liste de noeuds du PseudoLabyrinthe.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of Noeud</span>
+<span class="sd">            self.__noeuds</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.get_taille"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.get_taille">[docs]</a>    <span class="k">def</span> <span class="nf">get_taille</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Renvoie la taille du PseudoLabyrinthe.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            self.__taille</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__taille</span></div>
+
+<div class="viewcode-block" id="PseudoLabyrinthe.copie"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.PseudoLabyrinthe.copie">[docs]</a>    <span class="k">def</span> <span class="nf">copie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Copie le PseudoLabyrinthe courant.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        PseudoLabyrinthe</span>
+<span class="sd">            Copie du PseudoLabyrinthe courant.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">pl</span> <span class="o">=</span> <span class="n">PseudoLabyrinthe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_taille</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_noeuds</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">connexion</span> <span class="ow">in</span> <span class="n">noeud</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                <span class="n">pl</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">(</span><span class="n">noeud</span><span class="o">.</span><span class="n">get_id</span><span class="p">())</span><span class="o">.</span><span class="n">ajoute_connexions</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">(</span><span class="n">connexion</span><span class="o">.</span><span class="n">get_id</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">pl</span></div>
+            
+    
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autre</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Vérifie si deux PseudoLabyrinthes sont isomorphes.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True s&#39;ils sont isomorphes, False sinon.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_taille</span><span class="p">()</span> <span class="o">!=</span> <span class="n">autre</span><span class="o">.</span><span class="n">get_taille</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">copie_self</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copie</span><span class="p">()</span>
+        <span class="n">copie_self</span><span class="o">.</span><span class="n">bidirectionalise</span><span class="p">()</span>
+        <span class="n">copie_autre</span> <span class="o">=</span> <span class="n">autre</span><span class="o">.</span><span class="n">copie</span><span class="p">()</span>
+        <span class="n">copie_autre</span><span class="o">.</span><span class="n">bidirectionalise</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_taille</span><span class="p">()[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_taille</span><span class="p">()[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">noeud_self</span> <span class="o">=</span> <span class="n">copie_self</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+                <span class="n">noeud_autre</span> <span class="o">=</span> <span class="n">copie_autre</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+                <span class="n">liste_connexions_self</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">liste_connexions_autre</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">connexion</span> <span class="ow">in</span> <span class="n">noeud_self</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                    <span class="n">liste_connexions_self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connexion</span><span class="o">.</span><span class="n">get_id</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">connexion</span> <span class="ow">in</span> <span class="n">noeud_autre</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">():</span>
+                    <span class="n">liste_connexions_autre</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connexion</span><span class="o">.</span><span class="n">get_id</span><span class="p">())</span>
+                
+                <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">liste_connexions_self</span><span class="p">)</span><span class="o">!=</span><span class="nb">set</span><span class="p">(</span><span class="n">liste_connexions_autre</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autre</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">==</span><span class="n">autre</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Noeud"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.Noeud">[docs]</a><span class="k">class</span> <span class="nc">Noeud</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Un Noeud est un objet qui se correspond à une case d&#39;un PseudoLabyrinthe.</span>
+<span class="sd">    </span>
+<span class="sd">    Parametres</span>
+<span class="sd">    ----------</span>
+<span class="sd">    id : tuple </span>
+<span class="sd">        Contient la position du noeud.</span>
+<span class="sd">    connexions : liste de noeuds</span>
+<span class="sd">        Noeuds connexes au Noeud courant</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    __id : tuple </span>
+<span class="sd">        Contient la position du noeud.</span>
+<span class="sd">    __connexions : liste de noeuds</span>
+<span class="sd">        Noeuds connexes au Noeud courant</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">connexions</span><span class="o">=</span><span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connexions</span> <span class="o">=</span> <span class="n">connexions</span>
+
+<div class="viewcode-block" id="Noeud.get_id"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.Noeud.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Getter pour self.__id.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            self.__id</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__id</span></div>
+
+<div class="viewcode-block" id="Noeud.get_connexions"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.Noeud.get_connexions">[docs]</a>    <span class="k">def</span> <span class="nf">get_connexions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Getter pour self.__connexions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            self.__connexions</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connexions</span></div>
+
+
+<div class="viewcode-block" id="Noeud.ajoute_connexions"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.Noeud.ajoute_connexions">[docs]</a>    <span class="k">def</span> <span class="nf">ajoute_connexions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Ajoute des connexions à self.__connexions. Vérifie que les connexions sont valides.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Dans la plupart des cas utiliser ajoute_murs et ne pas ajoute_connexions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args : list of Noeud</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">TUPLES_VALIDES</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">!=</span> <span class="n">Noeud</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> est de type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="si">}</span><span class="s2"> est ce n&#39;est pas un noeud.&quot;</span><span class="p">)</span>
+
+            <span class="n">substraction</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="n">arg</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()))</span>
+            <span class="k">if</span> <span class="n">substraction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TUPLES_VALIDES</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;On ne peut pas connecter tuple </span><span class="si">{</span><span class="n">arg</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span><span class="si">}</span><span class="s2"> avec </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connexions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Noeud.supprime_connexions"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.Noeud.supprime_connexions">[docs]</a>    <span class="k">def</span> <span class="nf">supprime_connexions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Supprime des connexions de self.__connexions.</span>
+
+<span class="sd">        Parametres</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args : Liste of Noeud</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">arg</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connexions</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Noeud </span><span class="si">{</span><span class="n">arg</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span><span class="si">}</span><span class="s2"> n&#39;est pas connecté à </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__id</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connexions</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Noeud.supprime_connexions_redoublantes"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.Noeud.supprime_connexions_redoublantes">[docs]</a>    <span class="k">def</span> <span class="nf">supprime_connexions_redoublantes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Supprime les connexions rédoublantes du Noeud.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__connexions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_connexions</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="Noeud.get_voisins"><a class="viewcode-back" href="../../docs/Labyrinthes.html#Labyrinthes.utilites.Noeud.get_voisins">[docs]</a>    <span class="k">def</span> <span class="nf">get_voisins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudo_labyrinthe</span><span class="p">:</span> <span class="n">PseudoLabyrinthe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Trouve les voisins du noeud dans le PseudoLabyrinthe donné comme paramètre.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pseudo_labyrinthe: PseudoLabyrinthe </span>
+<span class="sd">            PseudoLabyrinthe où se trouve le Noeud.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list </span>
+<span class="sd">            Contient les noeuds voisins du noeud en question dans pseudo_labyrinthe.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">voisins</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">voisins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pseudo_labyrinthe</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">voisins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pseudo_labyrinthe</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">voisins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pseudo_labyrinthe</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">voisins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pseudo_labyrinthe</span><span class="o">.</span><span class="n">get_noeud_par_id</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">voisins</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Labyrinthes</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Alex SCOFIELD, Hugo TAILE MANIKOM, Rayan LALAOUI.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
