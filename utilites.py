@@ -10,15 +10,17 @@ class PseudoLabyrinthe():
     Un PseudoLabyrinthe de taille m*n est une graphe avec m*n noeuds où chaque
     noeud ne peut se connecter qu'à ses voisins.
 
+    Parameters
+    ----------
+    taille : tuple
+        Taille du PseudoLabyrinthe à construir.
+
     Attributes
     ----------
-    atribute taille: tuple
+    taille : tuple
         Contient les dimensions du pseudo_labyrinthes.
-    __noeuds: liste de Noeuds.
-
-    @method construit: Construction d'un PseudoLabyrinthe.
-    @method verifie_pseudo: Vérifie que les connexions entre les noeuds sont valides.
-    @method verifie_noeuds: Vérifie que les noeuds sont les casses du PseudoLabyrinthe.
+    __noeuds : list of Noeud
+        Liste de Noeuds.
     '''
 
     def __init__(self, taille: tuple) -> None:
@@ -31,12 +33,17 @@ class PseudoLabyrinthe():
 
     def construit(self, noeuds: list) -> None:
         '''
-        Construction d'un PseudoLabyrinthe.
+        Construit un PseudoLabyrinthe à partir d'une liste de Noeuds.
 
         Parameters
         ----------
-        noeuds: list
+        noeuds : list of Noeud
             Liste de noeuds à utiliser.
+
+        Raises
+        ------
+        ValueError
+            Si le résultat n'est pas un PseudoLabyrinthe valide.
         '''
 
         self.__noeuds = noeuds
@@ -45,7 +52,21 @@ class PseudoLabyrinthe():
     def get_noeud_par_id(self, id: tuple):
         '''
         Renvoie le Noeud se trouvant à la position id.
-        @param id: tuple.
+
+        Parameters
+        ----------
+        id : tuple
+            Position du Noeud à chercher
+
+        Returns
+        -------
+        Noeud
+            Noeud à la position demandée.
+        
+        Raises
+        ------
+        ValueError
+            Si l'id n'est pas valide.
         '''
 
         if id[0] < 0 or id[1] < 0 or id[0] >= self.__taille[0] or id[1] >= self.__taille[1]:
@@ -59,9 +80,13 @@ class PseudoLabyrinthe():
 
     def verifie_noeuds(self) -> None:
         '''
-        Vérifie que les noeuds de self.__noeuds ont des id valides, et qu'ils remplissent
-        le PseudoLabyrinthe. Ce ne devrait pas être nécessaire après avoir utiliser le
-        construct.
+        Vérifie que les Noeud de self.__noeuds ont des id valides, et qu'ils remplissent
+        le PseudoLabyrinthe.
+
+        Raises
+        ------
+        ValueError
+            Si les conditions ne sont pas satisfaites.
         '''
 
         for noeud in self.__noeuds:
@@ -83,6 +108,11 @@ class PseudoLabyrinthe():
     def verifie_connexions(self) -> None:
         '''
         Vérifie que les connexions entre les noeuds de self.__noeuds sont valides.
+
+        Raises
+        ------
+        ValueError
+            Si les connexions ne sont pas possibles.
         '''
 
         for noeud in self.__noeuds:
@@ -96,11 +126,30 @@ class PseudoLabyrinthe():
                 if abs(noeud_id[0]-connexion_id[0]) > 1 or abs(noeud_id[1]-connexion_id[1]) > 1:
                     raise ValueError(
                         f"Connexion directe entre deux noeuds pas contigus.")
+    
+    def verifie_bidirectionel(self) -> None:
+        '''
+        Vérifie qu'un PseudoLabyrinthe est bidirectionel.
+
+        Raises
+        ------
+        ValueError
+            Si le PseudoLabyrinthe courant n'est pas bidirectionel.
+        '''
+
+        for noeud in self.get_noeuds():
+            for connexion in noeud.get_connexions():
+                if noeud not in connexion.get_connexions():
+                    raise ValueError("PseudoLabyrinthe non bidirectionel.")
 
     def ajoute_murs(self, *args) -> None:
         '''
         Procédure qui ajoute un mur entre les noeuds donnés comme paramètres deux par deux.
-        @param *args: tuples de Noeuds.
+        
+        Parameters
+        ----------
+        *args : tuple of Noeud
+            Tuples de Noeuds à connecter deux par deux.
         '''
         for arg in args:
             noeud1 = arg[0]
@@ -110,11 +159,14 @@ class PseudoLabyrinthe():
             if noeud1 in noeud2.get_connexions():
                 noeud2.supprime_connexions(noeud1)
     
-    # On peut optimiser cette fonction si nécessaire plus tard.
     def supprime_murs(self, *args) -> None:
         '''
         Procédure qui supprime le mur eventuel entre deux noeuds.
-        @param *args: tuples de Noeuds.
+
+        Parameters
+        ----------
+        *args : tuple of Noeud
+            Tuples de Noeuds dont on veut supprimer le mur.
         '''
         for arg in args:
             noeud1 = arg[0]
@@ -127,6 +179,10 @@ class PseudoLabyrinthe():
     def bidirectionalise(self) -> None:
         '''
         Procédure qui bidirectionalise toutes les connexions entre noeuds du PseudoLabyrinthe.
+
+        Notes
+        -----
+        Ne devrait pas être nécessaire avec l'implementation bidirectionelle.
         '''
         for noeud in self.get_noeuds():
             for connexion in noeud.get_connexions():
@@ -135,36 +191,55 @@ class PseudoLabyrinthe():
 
     def supprime_connexions_redoublantes(self) -> None:
         '''
-        Supprime les connexions rédoublantes dans tous les noeuds du PseudoLabyrinthe.
+        Supprime les connexions rédoublantes dans tous les noeuds du PseudoLabyrinthe courant.
         '''
         for noeud in self.get_noeuds():
             noeud.supprime_connexions_redoublantes()
 
     def verifie(self):
         '''
-        Vérifie que l'objet et un PseudoLabyrinthe valide, lance erreurs si non.
-        '''
+        Vérifie que l'objet courant est un PseudoLabyrinthe valide.
 
+        Raises
+        ------
+        ValueError
+            Si le PseudoLabyrinthe n'est pas valide.
+        '''
         self.verifie_noeuds()
         self.verifie_connexions()
+        self.verifie_bidirectionel()
 
     def get_noeuds(self):
         '''
         Getter pour la liste de noeuds du PseudoLabyrinthe.
-        '''
 
+        Returns
+        -------
+        list of Noeud
+            self.__noeuds
+        '''
         return self.__noeuds
 
     def get_taille(self):
         '''
         Renvoie la taille du PseudoLabyrinthe.
+        
+        Returns
+        -------
+        tuple
+            self.__taille
         '''
 
         return self.__taille
 
     def copie(self):
         '''
-        Méthode qui copie le PseudoLabyrinthe courant.
+        Copie le PseudoLabyrinthe courant.
+
+        Returns
+        -------
+        PseudoLabyrinthe
+            Copie du PseudoLabyrinthe courant.
         '''
         pl = PseudoLabyrinthe(self.get_taille())
         for noeud in self.get_noeuds():
@@ -172,9 +247,16 @@ class PseudoLabyrinthe():
                 pl.get_noeud_par_id(noeud.get_id()).ajoute_connexions(pl.get_noeud_par_id(connexion.get_id()))
         return pl
             
-
     
     def __eq__(self, autre) -> bool:
+        '''
+        Vérifie si deux PseudoLabyrinthes sont isomorphes.
+
+        Returns
+        -------
+        bool
+            True s'ils sont isomorphes, False sinon.
+        '''
         if self.get_taille() != autre.get_taille():
             return False
         copie_self = self.copie()
@@ -199,20 +281,23 @@ class PseudoLabyrinthe():
     def __ne__(self, autre):
         return not(self==autre)
 
-
-class Labyrinthe(PseudoLabyrinthe):
-    '''
-    Labyrinthe vérifiant les deux proprietés expliquées au sujet.
-    '''
-
-    pass
-
-
 class Noeud():
     '''
     Un Noeud est un objet qui se correspond à une case d'un PseudoLabyrinthe.
-    @atribute __id: tuple contenant la position du noeud.
-    @atribute __connexions: liste de noeuds. Il n'y a pas de vérifications ici.
+    
+    Parametres
+    ----------
+    id : tuple 
+        Contient la position du noeud.
+    connexions : liste de noeuds
+        Noeuds connexes au Noeud courant
+
+    Attributes
+    ----------
+    __id : tuple 
+        Contient la position du noeud.
+    __connexions : liste de noeuds
+        Noeuds connexes au Noeud courant
     '''
 
     def __init__(self, id: tuple, connexions=[]) -> None:
@@ -222,6 +307,11 @@ class Noeud():
     def get_id(self) -> tuple:
         '''
         Getter pour self.__id.
+
+        Returns
+        -------
+        tuple
+            self.__id
         '''
 
         return self.__id
@@ -229,17 +319,27 @@ class Noeud():
     def get_connexions(self) -> list:
         '''
         Getter pour self.__connexions.
+
+        Returns
+        -------
+        list
+            self.__connexions
         '''
 
         return self.__connexions
 
-    # Ajouter des vérifications.
 
     def ajoute_connexions(self, *args):
         '''
         Ajoute des connexions à self.__connexions. Vérifie que les connexions sont valides.
+
+        Notes
+        -----
         Dans la plupart des cas utiliser ajoute_murs et ne pas ajoute_connexions.
-        @param *args: Liste d'autres Noeud.
+
+        Parameters
+        ----------
+        *args : list of Noeud
         '''
 
         TUPLES_VALIDES = [(1, 0), (-1, 0), (0, 1), (0, -1)]
@@ -260,7 +360,10 @@ class Noeud():
     def supprime_connexions(self, *args) -> None:
         '''
         Supprime des connexions de self.__connexions.
-        @param *args: Liste d'autres Noeud.
+
+        Parametres
+        ----------
+        *args : Liste of Noeud
         '''
 
         for arg in args:
@@ -278,8 +381,16 @@ class Noeud():
     def get_voisins(self, pseudo_labyrinthe: PseudoLabyrinthe) -> list:
         '''
         Trouve les voisins du noeud dans le PseudoLabyrinthe donné comme paramètre.
-        @param pseudo_labyrinthe: PseudoLabyrinthe où se trouve le Noeud.
-        @return list contenant les noeuds voisins du noeud en question dans pseudo_labyrinthe.
+
+        Parameters
+        ----------
+        pseudo_labyrinthe: PseudoLabyrinthe 
+            PseudoLabyrinthe où se trouve le Noeud.
+
+        Returns
+        -------
+        list 
+            Contient les noeuds voisins du noeud en question dans pseudo_labyrinthe.
         '''
 
         voisins = []
