@@ -9,9 +9,12 @@ class PseudoLabyrinthe():
     '''
     Un PseudoLabyrinthe de taille m*n est une graphe avec m*n noeuds où chaque
     noeud ne peut se connecter qu'à ses voisins.
-    @atribute taille: tuple contant les dimensions du pseudo_labyrinthes.
 
-    @attribute __noeuds: liste de Noeuds.
+    Attributes
+    ----------
+    atribute taille: tuple
+        Contient les dimensions du pseudo_labyrinthes.
+    __noeuds: liste de Noeuds.
 
     @method construit: Construction d'un PseudoLabyrinthe.
     @method verifie_pseudo: Vérifie que les connexions entre les noeuds sont valides.
@@ -29,7 +32,11 @@ class PseudoLabyrinthe():
     def construit(self, noeuds: list) -> None:
         '''
         Construction d'un PseudoLabyrinthe.
-        @param noeuds: liste de noeuds à utiliser.
+
+        Parameters
+        ----------
+        noeuds: list
+            Liste de noeuds à utiliser.
         '''
 
         self.__noeuds = noeuds
