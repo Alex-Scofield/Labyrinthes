@@ -12,6 +12,7 @@ Welcome to Labyrinthes's documentation!
    :caption: Contents:
 
 modules.rst
+Labyrinthes.rst
 
 
 
