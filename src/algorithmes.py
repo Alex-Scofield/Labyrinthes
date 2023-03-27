@@ -121,7 +121,7 @@ def construit_random_pseudo_labyrinthe_ajoute(taille: tuple) -> PseudoLabyrinthe
     pl = construit_pseudo_labyrinthe_vide(taille)
     nbmurs= random.randint(0,2*taille[0]*taille[1]-taille[0]-taille[1])
 
-    for i in range(len(nbmurs)):
+    for i in range(nbmurs):
         noeud: Noeud = random.choice(pl.get_noeuds())
         while len(noeud.get_connexions())==0:
             noeud: Noeud = random.choice(pl.get_noeuds())
@@ -148,7 +148,7 @@ def construit_random_pseudo_labyrinthe_supprime(taille:tuple) -> PseudoLabyrinth
     '''
     pl = PseudoLabyrinthe(taille)
     nmurs = random.randint(2*taille[0]*taille[1]-taille[0]-taille[1])
-    for i in range(len(nbmurs)):
+    for i in range(nmurs):
         noeud: Noeud = random.choice(pl.get_noeuds())
         voisin_choisi: Noeud = random.choice(noeud.get_voisins(pl)) 
         copie = noeud.get_connexions().copy()

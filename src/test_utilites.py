@@ -14,6 +14,20 @@ class TestInitialisationPseudoLabyrinthe(unittest.TestCase):
         for noeud in pseudo_labyrinthe.get_noeuds():
             self.assertTrue(noeud.get_connexions()==[])
 
+class TestCopieLabyrinthes(unittest.TestCase):
+    def test_copie_vide(self):
+        pl1 = construit_pseudo_labyrinthe_vide(TAILLE_TEST)
+        pl2 = pl1.copie()
+        self.assertTrue(nb_murs(pl2)==0)
+    
+    def test_copie(self):
+        pl1 = PseudoLabyrinthe(TAILLE_TEST)
+        pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id((0,1))))
+        pl2 = pl1.copie()
+        pl1.supprime_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id((0,1))))
+        self.assertTrue(nb_murs(pl1)!=nb_murs(pl2))
+
+
 class TestEgaliteLabyrinthes(unittest.TestCase):
     def test_egaux_vides(self):
         pl1 = construit_pseudo_labyrinthe_vide(TAILLE_TEST)

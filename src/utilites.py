@@ -260,7 +260,7 @@ class PseudoLabyrinthe():
         if self.get_taille() != autre.get_taille():
             return False
         copie_self = self.copie()
-        copie_self.bidirectionalise()
+        copie_self.bidirectionalise() # Ceci ne devrait plus être nécessaire.
         copie_autre = autre.copie()
         copie_autre.bidirectionalise()
         for i in range(self.get_taille()[0]):
