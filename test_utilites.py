@@ -88,8 +88,7 @@ class TestAjouteConnexions(unittest.TestCase):
         pseudo_labyrinthe = PseudoLabyrinthe(TAILLE_TEST)
         for noeud in pseudo_labyrinthe.get_noeuds():
             self.assertTrue(len(noeud.get_connexions())<=4)
-
-    @unittest.skip
+            
     def test_ajoute_connexions_labyrinthe_random(self):
         pseudo_labyrinthe: PseudoLabyrinthe = construit_random_labyrinthe(TAILLE_TEST)
         for noeud in pseudo_labyrinthe.get_noeuds():
