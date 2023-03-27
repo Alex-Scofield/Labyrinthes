@@ -12,10 +12,26 @@ src.affichage module
    :undoc-members:
    :show-inheritance:
 
+src.affichage\_docs module
+--------------------------
+
+.. automodule:: src.affichage_docs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 src.algorithmes module
 ----------------------
 
 .. automodule:: src.algorithmes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.algorithmes\_docs module
+----------------------------
+
+.. automodule:: src.algorithmes_docs
    :members:
    :undoc-members:
    :show-inheritance:

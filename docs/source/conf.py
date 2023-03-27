@@ -27,7 +27,7 @@ author = 'Alex Scofield Teruel, Hugo Taile-Manikom, Rayan Lalaoui'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.napoleon'
+extensions = ['sphinx.ext.autodoc','sphinx.ext.napoleon', 'sphinx_markdown_builder'
 
 ]
 napoleon_google_docstring = False

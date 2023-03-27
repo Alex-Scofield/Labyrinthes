@@ -1,10 +1,8 @@
 '''
 Algorithmes.
 '''
-
-from utilites import *
 import random
-
+from src.utilites import *
 def verifie_connexite(pseudo_labyrinthe: PseudoLabyrinthe) -> bool:
     '''
     Application de l'algorithme bfs pour vérifier si un Pseudo-Labyrinthe est connexe.
