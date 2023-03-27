@@ -4,13 +4,6 @@ src package
 Submodules
 ----------
 
-src.affichage module
---------------------
-
-.. automodule:: src.affichage
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 src.affichage\_docs module
 --------------------------
@@ -20,42 +13,10 @@ src.affichage\_docs module
    :undoc-members:
    :show-inheritance:
 
-src.algorithmes module
-----------------------
-
-.. automodule:: src.algorithmes
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 src.algorithmes\_docs module
 ----------------------------
 
 .. automodule:: src.algorithmes_docs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-src.gui module
---------------
-
-.. automodule:: src.gui
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-src.test\_algorithmes module
-----------------------------
-
-.. automodule:: src.test_algorithmes
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-src.test\_utilites module
--------------------------
-
-.. automodule:: src.test_utilites
    :members:
    :undoc-members:
    :show-inheritance:

@@ -2,11 +2,7 @@
 
 ## Submodules
 
-## src.affichage module
-
 ## src.affichage_docs module
-
-## src.algorithmes module
 
 ## src.algorithmes_docs module
 
@@ -273,12 +269,6 @@ Vérifie si un PseudoLabyrinthe est un Labyrinthe.
 
     bool
 
-
-## src.gui module
-
-## src.test_algorithmes module
-
-## src.test_utilites module
 
 ## src.utilites module
 
