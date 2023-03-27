@@ -1,0 +1,451 @@
+
+
+<!doctype html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>src package &#8212; Documentation Labyrinthes </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="src" href="modules.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="src"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Labyrinthes </a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">src</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="src-package">
+<h1>src package<a class="headerlink" href="#src-package" title="Lien permanent vers cette rubrique">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers cette rubrique">¶</a></h2>
+</section>
+<section id="src-affichage-module">
+<h2>src.affichage module<a class="headerlink" href="#src-affichage-module" title="Lien permanent vers cette rubrique">¶</a></h2>
+</section>
+<section id="src-algorithmes-module">
+<h2>src.algorithmes module<a class="headerlink" href="#src-algorithmes-module" title="Lien permanent vers cette rubrique">¶</a></h2>
+</section>
+<section id="src-gui-module">
+<h2>src.gui module<a class="headerlink" href="#src-gui-module" title="Lien permanent vers cette rubrique">¶</a></h2>
+</section>
+<section id="src-test-algorithmes-module">
+<h2>src.test_algorithmes module<a class="headerlink" href="#src-test-algorithmes-module" title="Lien permanent vers cette rubrique">¶</a></h2>
+</section>
+<section id="src-test-utilites-module">
+<h2>src.test_utilites module<a class="headerlink" href="#src-test-utilites-module" title="Lien permanent vers cette rubrique">¶</a></h2>
+</section>
+<section id="module-src.utilites">
+<span id="src-utilites-module"></span><h2>src.utilites module<a class="headerlink" href="#module-src.utilites" title="Lien permanent vers cette rubrique">¶</a></h2>
+<p>Construction de structures de données utiles.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utilites.Noeud">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utilites.</span></span><span class="sig-name descname"><span class="pre">Noeud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connexions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.Noeud" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Un Noeud est un objet qui se correspond à une case d’un PseudoLabyrinthe.</p>
+<dl class="simple">
+<dt>id<span class="classifier">tuple</span></dt><dd><p>Contient la position du noeud.</p>
+</dd>
+<dt>connexions<span class="classifier">liste de noeuds</span></dt><dd><p>Noeuds connexes au Noeud courant</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utilites.Noeud.__id">
+<span class="sig-name descname"><span class="pre">__id</span></span><a class="headerlink" href="#src.utilites.Noeud.__id" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Contient la position du noeud.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utilites.Noeud.__connexions">
+<span class="sig-name descname"><span class="pre">__connexions</span></span><a class="headerlink" href="#src.utilites.Noeud.__connexions" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Noeuds connexes au Noeud courant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>liste de noeuds</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.Noeud.ajoute_connexions">
+<span class="sig-name descname"><span class="pre">ajoute_connexions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.Noeud.ajoute_connexions" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Ajoute des connexions à self.__connexions. Vérifie que les connexions sont valides.</p>
+<p class="rubric">Notes</p>
+<p>Dans la plupart des cas utiliser ajoute_murs et ne pas ajoute_connexions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>list of Noeud</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.Noeud.get_connexions">
+<span class="sig-name descname"><span class="pre">get_connexions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#src.utilites.Noeud.get_connexions" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Getter pour self.__connexions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self.__connexions</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.Noeud.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#src.utilites.Noeud.get_id" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Getter pour self.__id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self.__id</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.Noeud.get_voisins">
+<span class="sig-name descname"><span class="pre">get_voisins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pseudo_labyrinthe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.utilites.PseudoLabyrinthe" title="src.utilites.PseudoLabyrinthe"><span class="pre">PseudoLabyrinthe</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#src.utilites.Noeud.get_voisins" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Trouve les voisins du noeud dans le PseudoLabyrinthe donné comme paramètre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pseudo_labyrinthe</strong> (<a class="reference internal" href="#src.utilites.PseudoLabyrinthe" title="src.utilites.PseudoLabyrinthe"><em>PseudoLabyrinthe</em></a>) – PseudoLabyrinthe où se trouve le Noeud.</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Contient les noeuds voisins du noeud en question dans pseudo_labyrinthe.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.Noeud.supprime_connexions">
+<span class="sig-name descname"><span class="pre">supprime_connexions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.Noeud.supprime_connexions" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Supprime des connexions de self.__connexions.</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>args : Liste of Noeud</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.Noeud.supprime_connexions_redoublantes">
+<span class="sig-name descname"><span class="pre">supprime_connexions_redoublantes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.Noeud.supprime_connexions_redoublantes" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Supprime les connexions rédoublantes du Noeud.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utilites.</span></span><span class="sig-name descname"><span class="pre">PseudoLabyrinthe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taille</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Un PseudoLabyrinthe de taille m*n est une graphe avec m*n noeuds où chaque
+noeud ne peut se connecter qu’à ses voisins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>taille</strong> (<em>tuple</em>) – Taille du PseudoLabyrinthe à construir.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.taille">
+<span class="sig-name descname"><span class="pre">taille</span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.taille" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Contient les dimensions du pseudo_labyrinthes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.__noeuds">
+<span class="sig-name descname"><span class="pre">__noeuds</span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.__noeuds" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Liste de Noeuds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of Noeud</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.ajoute_murs">
+<span class="sig-name descname"><span class="pre">ajoute_murs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.ajoute_murs" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Procédure qui ajoute un mur entre les noeuds donnés comme paramètres deux par deux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>tuple of Noeud</em>) – Tuples de Noeuds à connecter deux par deux.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.bidirectionalise">
+<span class="sig-name descname"><span class="pre">bidirectionalise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.bidirectionalise" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Procédure qui bidirectionalise toutes les connexions entre noeuds du PseudoLabyrinthe.</p>
+<p class="rubric">Notes</p>
+<p>Ne devrait pas être nécessaire avec l’implementation bidirectionelle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.construit">
+<span class="sig-name descname"><span class="pre">construit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noeuds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.construit" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Construit un PseudoLabyrinthe à partir d’une liste de Noeuds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>noeuds</strong> (<em>list of Noeud</em>) – Liste de noeuds à utiliser.</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si le résultat n’est pas un PseudoLabyrinthe valide.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.copie">
+<span class="sig-name descname"><span class="pre">copie</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.copie" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Copie le PseudoLabyrinthe courant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Copie du PseudoLabyrinthe courant.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#src.utilites.PseudoLabyrinthe" title="src.utilites.PseudoLabyrinthe">PseudoLabyrinthe</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.get_noeud_par_id">
+<span class="sig-name descname"><span class="pre">get_noeud_par_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.get_noeud_par_id" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Renvoie le Noeud se trouvant à la position id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>tuple</em>) – Position du Noeud à chercher</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Noeud à la position demandée.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.utilites.Noeud" title="src.utilites.Noeud">Noeud</a></p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si l’id n’est pas valide.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.get_noeuds">
+<span class="sig-name descname"><span class="pre">get_noeuds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.get_noeuds" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Getter pour la liste de noeuds du PseudoLabyrinthe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self.__noeuds</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of Noeud</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.get_taille">
+<span class="sig-name descname"><span class="pre">get_taille</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.get_taille" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Renvoie la taille du PseudoLabyrinthe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self.__taille</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.supprime_connexions_redoublantes">
+<span class="sig-name descname"><span class="pre">supprime_connexions_redoublantes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.supprime_connexions_redoublantes" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Supprime les connexions rédoublantes dans tous les noeuds du PseudoLabyrinthe courant.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.supprime_murs">
+<span class="sig-name descname"><span class="pre">supprime_murs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.supprime_murs" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Procédure qui supprime le mur eventuel entre deux noeuds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>tuple of Noeud</em>) – Tuples de Noeuds dont on veut supprimer le mur.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.verifie">
+<span class="sig-name descname"><span class="pre">verifie</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.verifie" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Vérifie que l’objet courant est un PseudoLabyrinthe valide.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Si le PseudoLabyrinthe n’est pas valide.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.verifie_bidirectionel">
+<span class="sig-name descname"><span class="pre">verifie_bidirectionel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.verifie_bidirectionel" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Vérifie qu’un PseudoLabyrinthe est bidirectionel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Si le PseudoLabyrinthe courant n’est pas bidirectionel.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.verifie_connexions">
+<span class="sig-name descname"><span class="pre">verifie_connexions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.verifie_connexions" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Vérifie que les connexions entre les noeuds de self.__noeuds sont valides.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Si les connexions ne sont pas possibles.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utilites.PseudoLabyrinthe.verifie_noeuds">
+<span class="sig-name descname"><span class="pre">verifie_noeuds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utilites.PseudoLabyrinthe.verifie_noeuds" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Vérifie que les Noeud de self.__noeuds ont des id valides, et qu’ils remplissent
+le PseudoLabyrinthe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Si les conditions ne sont pas satisfaites.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src" title="Lien permanent vers cette rubrique">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table des matières</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">src package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#src-affichage-module">src.affichage module</a></li>
+<li><a class="reference internal" href="#src-algorithmes-module">src.algorithmes module</a></li>
+<li><a class="reference internal" href="#src-gui-module">src.gui module</a></li>
+<li><a class="reference internal" href="#src-test-algorithmes-module">src.test_algorithmes module</a></li>
+<li><a class="reference internal" href="#src-test-utilites-module">src.test_utilites module</a></li>
+<li><a class="reference internal" href="#module-src.utilites">src.utilites module</a></li>
+<li><a class="reference internal" href="#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Sujet précédent</h4>
+    <p class="topless"><a href="modules.html"
+                          title="Chapitre précédent">src</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/src.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="src"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation Labyrinthes </a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >src</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">src package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Alex Scofield Teruel, Hugo Taile-Manikom, Rayan Lalaoui.
+      Créé en utilisant <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>
