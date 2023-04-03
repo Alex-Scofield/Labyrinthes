@@ -250,23 +250,19 @@ class PseudoLabyrinthe():
     
     def __eq__(self, autre) -> bool:
         '''
-        Vérifie si deux PseudoLabyrinthes sont isomorphes.
+        Vérifie si deux PseudoLabyrinthes sont égaux.
 
         Returns
         -------
         bool
-            True s'ils sont isomorphes, False sinon.
+            True s'ils sont égaux, False sinon.
         '''
         if self.get_taille() != autre.get_taille():
             return False
-        copie_self = self.copie()
-        copie_self.bidirectionalise() # Ceci ne devrait plus être nécessaire.
-        copie_autre = autre.copie()
-        copie_autre.bidirectionalise()
         for i in range(self.get_taille()[0]):
             for j in range(self.get_taille()[1]):
-                noeud_self = copie_self.get_noeud_par_id((i, j))
-                noeud_autre = copie_autre.get_noeud_par_id((i,j))
+                noeud_self = self.get_noeud_par_id((i, j))
+                noeud_autre = autre.get_noeud_par_id((i,j))
                 liste_connexions_self = []
                 liste_connexions_autre = []
                 for connexion in noeud_self.get_connexions():
@@ -279,7 +275,20 @@ class PseudoLabyrinthe():
         return True
 
     def __ne__(self, autre):
-        return not(self==autre)
+        '''
+        Vérifie si deux Labyrinthes ne sont pas égaux.
+
+        Parameters
+        ----------
+        autre : PseudoLabyrinthe
+            PseudoLabyrinthe auquel on compare.
+        
+        Returns
+        -------
+        bool
+            True si les pseudolabyrinthes ne sont pas égaux.
+        '''
+        return not(self.__eq__(autre))
 
 class Noeud():
     '''

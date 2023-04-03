@@ -52,11 +52,11 @@ class TestEgaliteLabyrinthes(unittest.TestCase):
         self.assertNotEqual(pl1, pl2)
 
     def test_differents_un_mur(self):
-        pl1 = PseudoLabyrinthe(TAILLE_TEST)
+        pl1 = construit_pseudo_labyrinthe_vide(TAILLE_TEST)
         pl1.ajoute_murs((pl1.get_noeud_par_id((0,0)), pl1.get_noeud_par_id((1,0))))
-        pl2 = PseudoLabyrinthe(TAILLE_TEST)
+        pl2 = construit_pseudo_labyrinthe_vide(TAILLE_TEST)
         pl2.ajoute_murs((pl2.get_noeud_par_id((0,0)), pl2.get_noeud_par_id((0,1))))
-        self.assertNotEqual(pl1, pl2)
+        self.assertTrue(pl1!=pl2)
     
     def test_different_sizes(self):
         pl1 = PseudoLabyrinthe((3,2))
@@ -104,7 +104,7 @@ class TestAjouteConnexions(unittest.TestCase):
             self.assertTrue(len(noeud.get_connexions())<=4)
             
     def test_ajoute_connexions_labyrinthe_random(self):
-        pseudo_labyrinthe: PseudoLabyrinthe = construit_random_labyrinthe(TAILLE_TEST)
+        pseudo_labyrinthe: PseudoLabyrinthe = construit_random_labyrinthe_supprime(TAILLE_TEST)
         for noeud in pseudo_labyrinthe.get_noeuds():
             self.assertTrue(len(noeud.get_connexions())<=4)
 
