@@ -155,6 +155,41 @@ def construit_random_pseudo_labyrinthe_supprime(taille:tuple) -> PseudoLabyrinth
         
     return pl
 
+def construit_random_pseudo_labyrinthe_supprime_normalise(taille:tuple) -> PseudoLabyrinthe:
+    '''
+    Construit un Pseudo-labyrinthe random, de taille donnée.
+
+    Parameters
+    ----------
+    taille : tuple
+        taille du PseudoLabyrinthe.
+
+    Returns
+    -------
+    PseudoLabyrinthe 
+        pseudo-labyrinthe random de la taille voulue.
+    '''
+    pl = PseudoLabyrinthe(taille)
+
+    murs_total = []
+    for i in range(taille[0]):
+        for j in range(taille[1]):
+            if i+1<taille[0] and ((i+1,j),(i,j)) not in murs_total:
+                    murs_total.append(((i, j),(i+1,j)))
+            if j+1<taille[1] and ((i,j+1),(i,j)) not in murs_total:
+                murs_total.append(((i, j),(i,j+1)))
+            if i-1>0 and ((i-1,j),(i,j)) not in murs_total:
+                murs_total.append(((i, j),(i-1,j)))
+            if j-1>0 and ((i,j-1),(i,j)) not in murs_total:
+                murs_total.append(((i, j),(i,j-1)))
+
+    for mur in murs_total:
+        if random.random() < 0.5:
+            noeud1 = pl.get_noeud_par_id(mur[0])
+            noeud2 = pl.get_noeud_par_id(mur[1])
+            pl.supprime_murs((noeud1, noeud2))
+        
+    return pl
 
 
 def construit_random_labyrinthe_supprime(taille: tuple) -> PseudoLabyrinthe:

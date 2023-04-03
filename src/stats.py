@@ -8,8 +8,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
-TAILLE = (2,2)
-N = 1000
+TAILLE = (3,2)
+N = 10000
 
 def plot_uniforme(taille: tuple, N=100000):
     pseudolabyrinthes = get_PseudoLabyrinthes(taille)
@@ -37,7 +37,8 @@ y = np.zeros(longueur)
 
 print("HIHIHI")
 for i in range(N):
-    construit = construit_random_pseudo_labyrinthe_ajoute(TAILLE)
+    construit = construit_random_pseudo_labyrinthe_supprime_normalise(TAILLE)
+    #construit = construit_random_labyrinthe_supprime(TAILLE)
     for j in range(longueur):
         if construit == pseudolabyrinthes[j]:
             y[j] += 1
@@ -52,6 +53,7 @@ for i in range(N):
 
 print("HOHOHO")
 plt.scatter(x, y)
+plt.ylim(0,100)
 plt.show()
 print(proportion/N)
 print(prop2/N)
